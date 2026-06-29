@@ -1,0 +1,122 @@
+/* ============================================================
+   MRC MAKİNE SANAYİ — Açık Kurumsal Tema
+   Beyaz/açık zemin, çelik-grafit metin, logo kırmızısı aksan
+   ============================================================ */
+
+:root {
+  /* Renkler */
+  --bg: #FAFAF8;          /* hafif sıcak beyaz */
+  --bg-soft: #F2F2EF;     /* bölüm ayrımı için açık gri */
+  --surface: #FFFFFF;     /* kart yüzeyi */
+  --ink: #16202E;         /* koyu çelik-lacivert ana metin */
+  --ink-2: #5A6678;       /* ikincil metin */
+  --line: #E2E2DD;        /* hairline */
+  --line-strong: #C9C9C2;
+  --accent: #D32D27;      /* logo kırmızısı */
+  --accent-dark: #B0241F;
+  --steel: #2B3A4D;       /* koyu çelik (footer, vurgu blokları) */
+  --steel-2: #1E2A38;
+
+  --max: 1200px;
+  --header-h: 76px;
+
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 38px); }
+@media (max-width: 500px) { :root { --header-h: 64px; } html { scroll-padding-top: calc(var(--header-h) + 32px); } }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+@media (max-width: 400px) { .container { padding: 0 16px; } }
+
+.section { padding: clamp(56px, 8vw, 104px) 0; }
+.section-soft { background: var(--bg-soft); }
+.section-dark { background: var(--steel-2); color: #fff; }
+.section-dark h1, .section-dark h2, .section-dark h3 { color: #fff; }
+
+/* Eyebrow / etiket */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.h1 { font-size: clamp(34px, 6vw, 60px); line-height: 1.04; }
+.h2 { font-size: clamp(28px, 4.5vw, 44px); margin-bottom: 16px; }
+.h3 { font-size: clamp(20px, 2.5vw, 26px); }
+
+.lead { font-size: clamp(16px, 2vw, 18px); line-height: 1.7; color: var(--ink-2); max-width: 640px; }
+.muted { color: var(--ink-2); }
+
+/* Butonlar */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: 3px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(211,45,39,0.25); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: var(--steel-2); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-light { background: #fff; color: var(--ink); }
+.btn-light:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+@media (max-width: 400px) { .btn { padding: 12px 20px; font-size: 14px; } }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Reveal animasyonu (scroll ile beliren) */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
