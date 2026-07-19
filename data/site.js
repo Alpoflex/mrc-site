@@ -19,7 +19,7 @@ export const company = {
 
 // Rakamlarla biz
 export const stats = [
-  { num: "25", unit: "mm", label: "Lazer kesim kapasitesi" },
+  { num: "35", unit: "mm", label: "Siyah sacda lazer kesim" },
   { num: "10", unit: "mm", label: "Abkant büküm kapasitesi" },
   { num: "5", unit: "", label: "Uzmanlık alanı" },
   { num: "7/24", unit: "", label: "Teklif desteği" },
@@ -77,7 +77,10 @@ export const services = [
     gallery: [
       "/images/insaat/insaat-01.jpeg","/images/insaat/insaat-02.jpeg","/images/insaat/insaat-03.jpeg",
       "/images/insaat/insaat-04.jpeg","/images/insaat/insaat-05.jpeg","/images/insaat/insaat-06.jpeg",
-      "/images/insaat/insaat-07.jpeg","/images/insaat/insaat-08.jpeg",
+      "/images/insaat/insaat-07.jpeg","/images/insaat/insaat-08.jpeg","/images/insaat/insaat-17.jpeg",
+      "/images/insaat/insaat-14.jpeg","/images/insaat/insaat-09.jpeg","/images/insaat/insaat-18.jpeg",
+      "/images/insaat/insaat-10.jpeg","/images/insaat/insaat-15.jpeg","/images/insaat/insaat-11.jpeg",
+      "/images/insaat/insaat-13.jpeg","/images/insaat/insaat-16.jpeg","/images/insaat/insaat-12.jpeg",
     ],
   },
   {
@@ -85,11 +88,12 @@ export const services = [
     n: "03",
     title: "Lazer Kesim",
     short: "Dekoratif kapı, korkuluk, pergola ve panel",
-    desc: "Fiber lazer ile desenli bahçe kapısı, korkuluk ve panel üretimi.",
+    desc: "Fiber lazer ile 35 mm'ye kadar hassas kesim, desenli kapı ve panel üretimi.",
     longDesc:
-      "Fiber lazer kesim teknolojisiyle dekoratif ve fonksiyonel metal işleri üretiyoruz. Desenli bahçe ve site kapıları, balkon ve merdiven korkulukları, pergola ve dekoratif paneller; villa, fabrika ve sosyal tesisler için özgün tasarımlar. 25 mm kalınlığa kadar hassas kesim.",
+      "Fiber lazer kesim teknolojisiyle dekoratif ve fonksiyonel metal işleri üretiyoruz. Desenli bahçe ve site kapıları, balkon ve merdiven korkulukları, pergola ve dekoratif paneller; villa, fabrika ve sosyal tesisler için özgün tasarımlar. Siyah sacda 35 mm, paslanmazda 25 mm kalınlığa kadar hassas kesim.",
     features: [
-      "25 mm kalınlığa kadar fiber lazer kesim",
+      "35 mm'ye kadar siyah sac kesim",
+      "25 mm'ye kadar paslanmaz kesim",
       "Desenli bahçe ve site kapıları",
       "Balkon ve merdiven korkulukları",
       "Pergola ve dekoratif paneller",
@@ -98,7 +102,14 @@ export const services = [
     gallery: [
       "/images/lazer/lazer-01.jpeg","/images/lazer/lazer-02.jpeg","/images/lazer/lazer-03.jpeg",
       "/images/lazer/lazer-04.jpeg","/images/lazer/lazer-05.jpeg","/images/lazer/lazer-06.jpeg",
-      "/images/lazer/lazer-07.jpeg",
+      "/images/lazer/lazer-07.jpeg","/images/lazer/lazer-08.jpeg","/images/lazer/lazer-09.jpeg",
+      "/images/lazer/lazer-10.jpeg","/images/lazer/lazer-11.jpeg",
+    ],
+    videos: [
+      { src: "/videos/lazer-video-01.mp4", poster: "/videos/lazer-video-01.jpg" },
+      { src: "/videos/lazer-video-02.mp4", poster: "/videos/lazer-video-02.jpg" },
+      { src: "/videos/lazer-video-03.mp4", poster: "/videos/lazer-video-03.jpg" },
+      { src: "/videos/lazer-video-04.mp4", poster: "/videos/lazer-video-04.jpg" },
     ],
   },
   {
@@ -115,10 +126,16 @@ export const services = [
       "Teknik çizime tam uyumlu üretim",
       "Tekli parçadan seri üretime",
     ],
-    cover: "/images/abkant/abkant-01.jpeg",
+    cover: "/images/abkant/abkant-12.jpeg",
     gallery: [
-      "/images/abkant/abkant-01.jpeg","/images/abkant/abkant-02.jpeg","/images/abkant/abkant-03.jpeg",
-      "/images/abkant/abkant-04.jpeg","/images/abkant/abkant-05.jpeg","/images/abkant/abkant-06.jpeg",
+      "/images/abkant/abkant-12.jpeg","/images/abkant/abkant-01.jpeg","/images/abkant/abkant-07.jpeg",
+      "/images/abkant/abkant-13.jpeg","/images/abkant/abkant-02.jpeg","/images/abkant/abkant-10.jpeg",
+      "/images/abkant/abkant-03.jpeg","/images/abkant/abkant-08.jpeg","/images/abkant/abkant-04.jpeg",
+      "/images/abkant/abkant-14.jpeg","/images/abkant/abkant-05.jpeg","/images/abkant/abkant-09.jpeg",
+      "/images/abkant/abkant-06.jpeg","/images/abkant/abkant-11.jpeg",
+    ],
+    videos: [
+      { src: "/videos/abkant-video-01.mp4", poster: "/videos/abkant-video-01.jpg" },
     ],
   },
   {
@@ -138,6 +155,12 @@ export const services = [
     confidential: true,
     gallery: [],
   },
+];
+
+// Kurumsal tanıtım afişleri (Hakkımızda sayfasında gösterilir)
+export const posters = [
+  { src: "/images/genel/afis-01.jpeg", alt: "MRC Makine Sanayi — Lazer kesimde hassasiyet neden önemlidir?", w: 1086, h: 1448 },
+  { src: "/images/genel/afis-02.jpeg", alt: "MRC Makine Sanayi — Lazer kesim, abkant büküm, kaynaklı imalat", w: 1024, h: 1536 },
 ];
 
 export const sectors = [

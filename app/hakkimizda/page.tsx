@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHero from "../../components/PageHero";
 import Reveal from "../../components/Reveal";
+import PosterGallery from "../../components/PosterGallery";
 import { advantages, stats, sectors } from "../../data/site";
 
 export const metadata = {
@@ -105,6 +106,17 @@ export default function Hakkimizda() {
               <Link href="/iletisim" className="btn btn-primary">Teklif Alın →</Link>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* Kurumsal afişler */}
+      <section className="section section-soft">
+        <div className="container">
+          <Reveal>
+            <div className="eyebrow" style={{ textAlign: "center" }}>Tanıtım</div>
+            <h2 className="h2" style={{ marginBottom: 40, textAlign: "center" }}>Kurumsal afişlerimiz</h2>
+          </Reveal>
+          <PosterGallery />
         </div>
       </section>
 

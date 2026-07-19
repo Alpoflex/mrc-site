@@ -68,14 +68,14 @@ export default function ServiceDetail({ params }: { params: { slug: string } }) 
         </div>
       </section>
 
-      {s.gallery.length > 0 && (
+      {(s.gallery.length > 0 || (s.videos && s.videos.length > 0)) && (
         <section className="section section-soft">
           <div className="container">
             <Reveal>
               <div className="eyebrow">Galeri</div>
               <h2 className="h2" style={{ marginBottom: 36 }}>Çalışmalarımızdan örnekler</h2>
             </Reveal>
-            <ServiceGallery title={s.title} gallery={s.gallery} />
+            <ServiceGallery title={s.title} gallery={s.gallery} videos={("videos" in s ? s.videos : []) as any} />
           </div>
         </section>
       )}

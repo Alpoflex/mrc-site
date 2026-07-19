@@ -16,6 +16,18 @@ export default function HomeHero() {
           sizes="100vw"
           className="hero-img"
         />
+        <video
+          className="hero-video"
+          src="/videos/lazer-video-01.mp4"
+          poster="/videos/lazer-video-01.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          tabIndex={-1}
+        />
         <div className="hero-overlay" />
       </div>
 
@@ -54,6 +66,7 @@ export default function HomeHero() {
         .hero { position: relative; background: var(--steel-2); overflow: hidden; }
         .hero-media { position: absolute; inset: 0; overflow: hidden; }
         :global(.hero-img) { object-fit: cover; }
+        .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         .hero-overlay {
           position: absolute; inset: 0;
           background: linear-gradient(105deg, rgba(20,32,46,0.94) 0%, rgba(20,32,46,0.82) 45%, rgba(20,32,46,0.5) 100%);
