@@ -70,20 +70,24 @@ export default function HomeHero() {
 
       <div className="container hero-in">
         <div className="hero-content">
-          <div className="eyebrow" style={{ color: "#ff7a6b" }}>{company.location}</div>
-          <h1 className="h1 hero-title">
+          <div className="eyebrow hero-up hero-d1" style={{ color: "#ff7a6b" }}>{company.location}</div>
+          <h1 className="h1 hero-title hero-up hero-d2">
             Çelikte ve sac işlemede<br />
             <span className="hero-accent">uçtan uca üretim ortağınız</span>
           </h1>
-          <p className="hero-lead">
+          <p className="hero-lead hero-up hero-d3">
             Çelik konstrüksiyon, fiber lazer kesim, abkant büküm, sac işleme ve inşaat
             taahhüt. Modern makine parkuru ve uzman kadromuzla projenizi baştan sona
             tek elden üretiyoruz.
           </p>
-          <div className="hero-btns">
+          <div className="hero-btns hero-up hero-d4">
             <Link href="/iletisim" className="btn btn-primary">Teklif Alın →</Link>
             <Link href="/hizmetler" className="btn btn-light">Hizmetlerimiz</Link>
           </div>
+        </div>
+        <div className="hero-scroll" aria-hidden="true">
+          <span className="hero-scroll-line" />
+          KAYDIR
         </div>
       </div>
 
@@ -115,6 +119,17 @@ export default function HomeHero() {
         .hero-accent::after { content: ""; display: block; width: 88px; height: 4px; background: var(--accent); margin-top: 22px; }
         .hero-lead { font-size: clamp(16px, 2vw, 19px); color: #c5cdd8; max-width: 600px; line-height: 1.7; margin-bottom: 36px; }
         .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+        .hero-up { opacity: 0; transform: translateY(22px); animation: heroUp .7s cubic-bezier(.2,.7,.3,1) forwards; }
+        .hero-d1 { animation-delay: .1s; } .hero-d2 { animation-delay: .22s; } .hero-d3 { animation-delay: .36s; } .hero-d4 { animation-delay: .5s; }
+        @keyframes heroUp { to { opacity: 1; transform: none; } }
+        .hero-scroll { position: absolute; right: 24px; bottom: 26px; display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 0.3em; color: rgba(255,255,255,0.55); writing-mode: vertical-rl; }
+        .hero-scroll-line { width: 2px; height: 44px; background: rgba(255,255,255,0.25); position: relative; overflow: hidden; }
+        .hero-scroll-line::after { content: ""; position: absolute; left: 0; top: -50%; width: 100%; height: 50%; background: var(--accent); animation: scrollDrip 1.8s ease-in-out infinite; }
+        @keyframes scrollDrip { to { top: 110%; } }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-up { opacity: 1; transform: none; animation: none; }
+          .hero-scroll-line::after { animation: none; }
+        }
         .hero-stats { position: relative; background: var(--accent); }
         .hero-stats-in { display: grid; grid-template-columns: repeat(4, 1fr); }
         .hstat { padding: 26px 20px; border-right: 1px solid rgba(255,255,255,0.18); }
@@ -127,6 +142,7 @@ export default function HomeHero() {
           .hstat:nth-child(2) { border-right: none; }
           .hstat:nth-child(1), .hstat:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.18); }
         }
+        @media (max-width: 700px) { .hero-scroll { display: none; } }
         @media (max-width: 400px) {
           .hero-stats-in { grid-template-columns: 1fr 1fr; gap: 0; }
           .hstat { padding: 20px 14px; }

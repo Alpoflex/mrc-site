@@ -13,6 +13,7 @@ export default function Projeler() {
         eyebrow="Projeler"
         title="Çalışmalarımızdan örnekler"
         desc="Çelik konstrüksiyon, inşaat ve lazer kesim alanlarında gerçekleştirdiğimiz işlerden bir seçki."
+        image="/images/celik/celik-04.jpeg"
       />
       <section className="section">
         <div className="container">

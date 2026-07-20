@@ -23,7 +23,7 @@ export default function ServiceDetail({ params }: { params: { slug: string } }) 
 
   return (
     <>
-      <PageHero eyebrow={`Hizmet ${s.n}`} title={s.title} desc={s.short} crumb={s.title} />
+      <PageHero eyebrow={`Hizmet ${s.n}`} title={s.title} desc={s.short} crumb={s.title} image={s.cover} />
 
       <section className="section">
         <div className="container det-grid">

@@ -15,6 +15,7 @@ export default function Iletisim() {
         eyebrow="İletişim"
         title="Projeniz için bize ulaşın"
         desc="Teknik çiziminizi veya ihtiyacınızı iletin, en kısa sürede dönüş yapalım."
+        image="/images/celik/celik-02.jpeg"
       />
 
       <section className="section">

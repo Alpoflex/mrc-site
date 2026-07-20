@@ -93,8 +93,9 @@ export default function Home() {
           </Reveal>
           <div className="proc">
             {processSteps.map((p, i) => (
-              <Reveal key={p.n} delay={i * 80}>
+              <Reveal key={p.n} delay={i * 90}>
                 <div className="proc-step">
+                  <span className="proc-node" aria-hidden="true" />
                   <span className="proc-n">{p.n}</span>
                   <h3 className="proc-title">{p.title}</h3>
                   <p className="proc-desc">{p.desc}</p>
@@ -138,6 +139,9 @@ export default function Home() {
 
       {/* CTA */}
       <section className="cta">
+        <svg className="cta-gear" viewBox="0 0 100 100" aria-hidden="true">
+          <path fill="currentColor" d="M50 34a16 16 0 1 0 0 32 16 16 0 0 0 0-32zm0 24a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm45-13.3-8.6-1.5a37 37 0 0 0-2.5-6.1l5-7.2-7.8-7.8-7.2 5a37 37 0 0 0-6.1-2.5L66.3 16H55.2l-1.5 8.6a37 37 0 0 0-6.1 2.5l-7.2-5-7.8 7.8 5 7.2a37 37 0 0 0-2.5 6.1L26.5 44v11.1l8.6 1.5a37 37 0 0 0 2.5 6.1l-5 7.2 7.8 7.8 7.2-5a37 37 0 0 0 6.1 2.5l1.5 8.6h11.1l1.5-8.6a37 37 0 0 0 6.1-2.5l7.2 5 7.8-7.8-5-7.2a37 37 0 0 0 2.5-6.1l8.6-1.5V44.7z" />
+        </svg>
         <div className="container cta-in">
           <Reveal>
             <h2 className="h2 cta-title">Projeniz için hemen teklif alın</h2>
@@ -158,12 +162,14 @@ export default function Home() {
         .i-img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; box-shadow: 0 20px 50px rgba(22,32,46,0.12); }
         .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 44px; flex-wrap: wrap; }
         .sec-head-p { max-width: 420px; }
-        .proc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid var(--ink); }
-        .proc-step { padding: 28px 24px 28px 0; border-right: 1px solid var(--line); padding-left: 24px; }
-        .proc-step:first-child { padding-left: 0; }
-        .proc-step:last-child { border-right: none; }
-        .proc-n { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; }
-        .proc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin: 12px 0 8px; }
+        .proc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+        .proc::before { content: ""; position: absolute; top: 7px; left: 8px; right: 8px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--line-strong)); }
+        .proc-step { position: relative; padding: 34px 20px 0 0; transition: transform .25s ease; }
+        .proc-step:hover { transform: translateY(-4px); }
+        .proc-node { position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); transition: background .25s ease, box-shadow .25s ease; }
+        .proc-step:hover .proc-node { background: var(--accent); box-shadow: 0 0 0 6px rgba(211,45,39,0.12); }
+        .proc-n { font-family: var(--font-display); font-size: 13px; font-weight: 800; color: var(--accent); letter-spacing: 0.14em; }
+        .proc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin: 10px 0 8px; }
         .proc-desc { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
         .why-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
         .adv-list { display: flex; flex-direction: column; gap: 22px; margin-top: 30px; }
@@ -175,8 +181,12 @@ export default function Home() {
         .sectors-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 20px; }
         .sectors { display: flex; flex-wrap: wrap; gap: 10px; }
         .sector-chip { font-size: 13.5px; color: #cfd6df; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 100px; }
-        .cta { background: var(--accent); padding: clamp(56px, 8vw, 88px) 0; }
-        .cta-in { text-align: center; }
+        .cta { position: relative; background: var(--accent); padding: clamp(56px, 8vw, 88px) 0; overflow: hidden; }
+        .cta::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 10px; background: repeating-linear-gradient(-45deg, rgba(15,20,28,0.35) 0 14px, transparent 14px 28px); }
+        .cta-gear { position: absolute; right: -70px; top: 50%; transform: translateY(-50%); width: 340px; height: 340px; color: rgba(255,255,255,0.09); animation: gearSpin 40s linear infinite; pointer-events: none; }
+        @keyframes gearSpin { to { transform: translateY(-50%) rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .cta-gear { animation: none; } }
+        .cta-in { position: relative; text-align: center; }
         .cta-title { color: #fff; margin-bottom: 14px; }
         .cta-text { color: rgba(255,255,255,0.9); font-size: 17px; max-width: 480px; margin: 0 auto 30px; }
         .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -186,16 +196,14 @@ export default function Home() {
           .intro-grid { grid-template-columns: 1fr; }
           .intro-img { order: 2; }
           .intro-tx { order: 1; }
-          .proc { grid-template-columns: 1fr 1fr; }
-          .proc-step { border-bottom: 1px solid var(--line); }
-          .proc-step:nth-child(2) { border-right: none; }
-          .proc-step:nth-child(3), .proc-step:nth-child(4) { border-bottom: none; }
+          .proc { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+          .proc::before { display: none; }
           .why-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 520px) {
-          .proc { grid-template-columns: 1fr; }
-          .proc-step { border-right: none; padding-left: 0; border-bottom: 1px solid var(--line); }
-          .proc-step:last-child { border-bottom: none; }
+          .proc { grid-template-columns: 1fr; gap: 26px; }
+          .proc-step { padding-left: 30px; padding-top: 0; }
+          .proc-node { top: 3px; }
           .sec-head { flex-direction: column; align-items: flex-start; gap: 16px; }
           .sec-head-p { max-width: 100%; }
         }

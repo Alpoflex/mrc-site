@@ -10,6 +10,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import WhatsAppFloat from "../components/WhatsAppFloat";
+import ScrollExtras from "../components/ScrollExtras";
 import { company } from "../data/site";
 
 export const metadata: Metadata = {
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main>{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <ScrollExtras />
       </body>
     </html>
   );

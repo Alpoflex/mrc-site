@@ -16,6 +16,7 @@ export default function Hizmetler() {
         eyebrow="Hizmetlerimiz"
         title="Beş uzmanlık alanı, tek üretim ortağı"
         desc="Endüstriyel çelik yapıdan ince dekoratif lazer kesime kadar ihtiyacınız olan her üretimi tek elden sunuyoruz."
+        image="/images/abkant/abkant-12.jpeg"
       />
 
       <section className="section">

@@ -53,7 +53,11 @@ h1, h2, h3, h4 {
 @media (max-width: 400px) { .container { padding: 0 16px; } }
 
 .section { padding: clamp(56px, 8vw, 104px) 0; }
-.section-soft { background: var(--bg-soft); }
+.section-soft {
+  background: var(--bg-soft);
+  background-image: radial-gradient(rgba(22, 32, 46, 0.05) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
 .section-dark { background: var(--steel-2); color: #fff; }
 .section-dark h1, .section-dark h2, .section-dark h3 { color: #fff; }
 
@@ -110,6 +114,8 @@ h1, h2, h3, h4 {
 @media (max-width: 400px) { .btn { padding: 12px 20px; font-size: 14px; } }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+::selection { background: var(--accent); color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }

@@ -17,6 +17,7 @@ export default function Hakkimizda() {
         eyebrow="Hakkımızda"
         title="Köklü tecrübe, modern üretim"
         desc="Kırıkkale Hacılar'da, çelik ve sac işlemenin her alanında güvenilir bir üretim ortağı."
+        image="/images/insaat/insaat-14.jpeg"
       />
 
       <section className="section">
