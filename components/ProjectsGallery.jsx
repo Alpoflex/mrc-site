@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import Image from "next/image";
 import { services } from "../data/site";
 
@@ -22,6 +22,7 @@ const allItems = services.filter(hasMedia).flatMap((s) => [
 export default function ProjectsGallery() {
   const [filter, setFilter] = useState("all");
   const [lb, setLb] = useState(null);
+  const touchX = useRef(null);
 
   const items = useMemo(() => {
     if (filter === "all") return allItems;
@@ -68,7 +69,17 @@ export default function ProjectsGallery() {
       </div>
 
       {lb != null && items[lb] && (
-        <div className="lb" onClick={close}>
+        <div
+          className="lb"
+          onClick={close}
+          onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            if (touchX.current == null) return;
+            const dx = e.changedTouches[0].clientX - touchX.current;
+            touchX.current = null;
+            if (Math.abs(dx) > 40) (dx < 0 ? next() : prev());
+          }}
+        >
           <button className="lb-x" onClick={close} aria-label="Kapat">✕</button>
           <button className="lb-nav lb-p" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Önceki">‹</button>
           <div className="lb-stage" onClick={(e) => e.stopPropagation()}>

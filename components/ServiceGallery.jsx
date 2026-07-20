@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 
 // gallery: görsel yolu dizisi, videos: [{src, poster}] — grid'de ilk görselden
@@ -13,6 +13,7 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
   ];
 
   const [lb, setLb] = useState(null);
+  const touchX = useRef(null);
 
   const close = useCallback(() => setLb(null), []);
   const next = useCallback(() => setLb((s) => (s == null ? null : (s + 1) % items.length)), [items.length]);
@@ -55,7 +56,17 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
       ))}
 
       {lb != null && items[lb] && (
-        <div className="lb" onClick={close}>
+        <div
+          className="lb"
+          onClick={close}
+          onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            if (touchX.current == null) return;
+            const dx = e.changedTouches[0].clientX - touchX.current;
+            touchX.current = null;
+            if (Math.abs(dx) > 40) (dx < 0 ? next() : prev());
+          }}
+        >
           <button className="lb-x" onClick={close} aria-label="Kapat">✕</button>
           <button className="lb-nav lb-p" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Önceki">‹</button>
           <div className="lb-stage" onClick={(e) => e.stopPropagation()}>

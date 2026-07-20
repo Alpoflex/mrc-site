@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import HomeHero from "../components/HomeHero";
 import ServicesGrid from "../components/ServicesGrid";
+import HomeShowcase from "../components/HomeShowcase";
+import Marquee from "../components/Marquee";
 import Reveal from "../components/Reveal";
 import { processSteps, advantages, sectors } from "../data/site";
 
@@ -60,6 +62,27 @@ export default function Home() {
           <ServicesGrid />
         </div>
       </section>
+
+      {/* ÜRETİMDEN KARELER */}
+      <section className="section section-dark">
+        <div className="container">
+          <Reveal>
+            <div className="sec-head">
+              <div>
+                <div className="eyebrow" style={{ color: "#ff7a6b" }}>Üretimden Kareler</div>
+                <h2 className="h2">İşçiliğimizi kendi gözlerinizle görün</h2>
+              </div>
+              <p className="lead sec-head-p" style={{ color: "#9fabbb" }}>
+                Atölyemizden ve sahadan seçtiğimiz kareler; lazer kesimden çelik
+                montaja üretimin her aşaması burada.
+              </p>
+            </div>
+          </Reveal>
+          <HomeShowcase />
+        </div>
+      </section>
+
+      <Marquee />
 
       {/* SÜREÇ */}
       <section className="section">

@@ -1,10 +1,45 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { company, stats } from "../data/site";
 
+// Sayısal istatistikleri 0'dan değere doğru akıtır ("7/24" gibi olanlar sabit kalır)
+function StatNum({ value }) {
+  const numeric = /^\d+$/.test(value);
+  const target = numeric ? parseInt(value, 10) : 0;
+  const [n, setN] = useState(numeric ? 0 : null);
+
+  useEffect(() => {
+    if (!numeric) return;
+    let raf;
+    const t0 = performance.now();
+    const dur = 1400;
+    const tick = (t) => {
+      const p = Math.min((t - t0) / dur, 1);
+      setN(Math.round(target * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [numeric, target]);
+
+  return <>{numeric ? n : value}</>;
+}
+
 export default function HomeHero() {
+  const videoRef = useRef(null);
+
+  // Sekme arka plana alınıp geri gelince tarayıcının duraklattığı videoyu sürdür
+  useEffect(() => {
+    const resume = () => {
+      if (document.visibilityState === "visible") videoRef.current?.play().catch(() => {});
+    };
+    document.addEventListener("visibilitychange", resume);
+    return () => document.removeEventListener("visibilitychange", resume);
+  }, []);
+
   return (
     <section className="hero">
       <div className="hero-media">
@@ -17,6 +52,7 @@ export default function HomeHero() {
           className="hero-img"
         />
         <video
+          ref={videoRef}
           className="hero-video"
           src="/videos/lazer-video-01.mp4"
           poster="/videos/lazer-video-01.jpg"
@@ -55,7 +91,7 @@ export default function HomeHero() {
         <div className="container hero-stats-in">
           {stats.map((s) => (
             <div key={s.label} className="hstat">
-              <div className="hstat-num">{s.num}<span className="hstat-unit">{s.unit}</span></div>
+              <div className="hstat-num"><StatNum value={s.num} /><span className="hstat-unit">{s.unit}</span></div>
               <div className="hstat-label">{s.label}</div>
             </div>
           ))}
