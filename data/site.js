@@ -160,7 +160,7 @@ export const services = [
 // Kurumsal tanıtım afişleri (Hakkımızda sayfasında gösterilir)
 export const posters = [
   { src: "/images/genel/afis-01.jpeg", alt: "MRC Makine Sanayi — Lazer kesimde hassasiyet neden önemlidir?", w: 1086, h: 1448 },
-  { src: "/images/genel/afis-02.jpeg", alt: "MRC Makine Sanayi — Lazer kesim, abkant büküm, kaynaklı imalat", w: 1024, h: 1536 },
+  { src: "/images/genel/afis-02.jpeg", alt: "MRC Makine Sanayi — Lazer kesim, abkant büküm, kaynaklı imalat", w: 1023, h: 1537 },
 ];
 
 export const sectors = [
