@@ -10,7 +10,7 @@ export const company = {
   location: "Kırıkkale · Hacılar",
   phone: "0538 315 96 54",
   phoneIntl: "+905383159654",
-  email: "sametmer10@gmail.com",
+  email: "mrcmaksan@mrcmaksan.com",
   address: "Sağlık Mah. Abdi İpekçi Cad. No:36, Hacılar, Kırıkkale",
   mapUrl: "https://maps.app.goo.gl/3SBZybLAfBRYj6hk8",
   // Web3Forms anahtarı — https://web3forms.com adresinden ücretsiz alınır
@@ -19,7 +19,7 @@ export const company = {
 
 // Rakamlarla biz
 export const stats = [
-  { num: "35", unit: "mm", label: "Siyah sacda lazer kesim" },
+  { num: "25", unit: "mm", label: "Lazer kesim kapasitesi" },
   { num: "10", unit: "mm", label: "Abkant büküm kapasitesi" },
   { num: "5", unit: "", label: "Uzmanlık alanı" },
   { num: "7/24", unit: "", label: "Teklif desteği" },
@@ -88,12 +88,11 @@ export const services = [
     n: "03",
     title: "Lazer Kesim",
     short: "Dekoratif kapı, korkuluk, pergola ve panel",
-    desc: "Fiber lazer ile 35 mm'ye kadar hassas kesim, desenli kapı ve panel üretimi.",
+    desc: "Fiber lazer ile 25 mm'ye kadar hassas kesim, desenli kapı ve panel üretimi.",
     longDesc:
-      "Fiber lazer kesim teknolojisiyle dekoratif ve fonksiyonel metal işleri üretiyoruz. Desenli bahçe ve site kapıları, balkon ve merdiven korkulukları, pergola ve dekoratif paneller; villa, fabrika ve sosyal tesisler için özgün tasarımlar. Siyah sacda 35 mm, paslanmazda 25 mm kalınlığa kadar hassas kesim.",
+      "Fiber lazer kesim teknolojisiyle dekoratif ve fonksiyonel metal işleri üretiyoruz. Desenli bahçe ve site kapıları, balkon ve merdiven korkulukları, pergola ve dekoratif paneller; villa, fabrika ve sosyal tesisler için özgün tasarımlar. 25 mm kalınlığa kadar hassas kesim.",
     features: [
-      "35 mm'ye kadar siyah sac kesim",
-      "25 mm'ye kadar paslanmaz kesim",
+      "25 mm'ye kadar hassas lazer kesim",
       "Desenli bahçe ve site kapıları",
       "Balkon ve merdiven korkulukları",
       "Pergola ve dekoratif paneller",

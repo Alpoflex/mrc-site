@@ -9,7 +9,8 @@ import { company, stats } from "../data/site";
 function StatNum({ value }) {
   const numeric = /^\d+$/.test(value);
   const target = numeric ? parseInt(value, 10) : 0;
-  const [n, setN] = useState(numeric ? 0 : null);
+  // SSR/JS'siz durumda hedef değer görünür; animasyon mount'ta 0'dan başlar
+  const [n, setN] = useState(numeric ? target : null);
 
   useEffect(() => {
     if (!numeric) return;
