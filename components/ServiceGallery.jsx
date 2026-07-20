@@ -14,6 +14,7 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
 
   const [lb, setLb] = useState(null);
   const touchX = useRef(null);
+  const lbCloseRef = useRef(null);
 
   const close = useCallback(() => setLb(null), []);
   const next = useCallback(() => setLb((s) => (s == null ? null : (s + 1) % items.length)), [items.length]);
@@ -28,6 +29,7 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    lbCloseRef.current?.focus();
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
   }, [lb, close, next, prev]);
 
@@ -58,6 +60,9 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
       {lb != null && items[lb] && (
         <div
           className="lb"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Galeri görüntüleyici"
           onClick={close}
           onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
           onTouchEnd={(e) => {
@@ -67,7 +72,7 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
             if (Math.abs(dx) > 40) (dx < 0 ? next() : prev());
           }}
         >
-          <button className="lb-x" onClick={close} aria-label="Kapat">✕</button>
+          <button ref={lbCloseRef} className="lb-x" onClick={close} aria-label="Kapat">✕</button>
           <button className="lb-nav lb-p" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Önceki">‹</button>
           <div className="lb-stage" onClick={(e) => e.stopPropagation()}>
             {items[lb].type === "video" ? (

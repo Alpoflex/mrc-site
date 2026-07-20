@@ -5,15 +5,6 @@ import Image from "next/image";
 import { services } from "../data/site";
 import Reveal from "./Reveal";
 
-function BendIcon() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" width="44" height="44">
-      <path d="M8 44h28a12 12 0 0 0 12-12V12" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M44 18l4-6 4 6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M8 52h48" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
-    </svg>
-  );
-}
 function LockIcon() {
   return (
     <svg viewBox="0 0 64 64" fill="none" width="44" height="44">
@@ -24,61 +15,70 @@ function LockIcon() {
   );
 }
 
+// Fotoğraf öncelikli hizmet kartları — görsel tam kart, metin degrade üzerinde.
 export default function ServicesGrid() {
   return (
     <div className="sg">
-      {services.map((s, i) => (
-        <Reveal key={s.slug} delay={i * 70}>
-          <Link href={`/hizmetler/${s.slug}`} className="sg-card">
-            <div className="sg-media">
-              {s.cover ? (
+      {services.map((s, i) => {
+        const photos = s.gallery.length;
+        const vids = s.videos ? s.videos.length : 0;
+        return (
+          <Reveal key={s.slug} delay={i * 70}>
+            <Link href={`/hizmetler/${s.slug}`} className="sg-card">
+              {s.cover && (
                 <Image src={s.cover} alt={s.title} fill sizes="(max-width:800px) 100vw, 33vw" className="sg-img" />
-              ) : (
-                <div className={`sg-ph ${s.confidential ? "conf" : ""}`}>
-                  {s.confidential ? <LockIcon /> : <BendIcon />}
-                  {s.confidential && <span className="conf-tag">GİZLİLİK SÖZLEŞMESİ</span>}
+              )}
+              {s.confidential && (
+                <div className="sg-conf">
+                  <LockIcon />
+                  <span className="sg-conf-tag">GİZLİLİK SÖZLEŞMESİ</span>
                 </div>
               )}
+              <div className="sg-shade" aria-hidden="true" />
               <span className="sg-num">{s.n}</span>
-              {(s.gallery.length > 0 || (s.videos && s.videos.length > 0)) && (
+              {(photos > 0 || vids > 0) && (
                 <span className="sg-count">
-                  {s.gallery.length > 0 && `${s.gallery.length} fotoğraf`}
-                  {s.gallery.length > 0 && s.videos && s.videos.length > 0 && " · "}
-                  {s.videos && s.videos.length > 0 && `${s.videos.length} video`}
+                  {photos > 0 && `${photos} fotoğraf`}
+                  {photos > 0 && vids > 0 && " · "}
+                  {vids > 0 && `${vids} video`}
                 </span>
               )}
-            </div>
-            <div className="sg-body">
-              <h3 className="sg-title">{s.title}</h3>
-              <p className="sg-short">{s.short}</p>
-              <span className="sg-link">Detaylı bilgi →</span>
-            </div>
-          </Link>
-        </Reveal>
-      ))}
+              <div className="sg-info">
+                <h3 className="sg-title">{s.title}</h3>
+                <p className="sg-short">{s.short}</p>
+                <span className="sg-link">İncele <span className="sg-arrow">→</span></span>
+              </div>
+            </Link>
+          </Reveal>
+        );
+      })}
 
       <style jsx>{`
         .sg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
         .sg :global(.sg-card) {
-          display: flex; flex-direction: column; background: var(--surface);
-          border: 1px solid var(--line); border-radius: 6px; overflow: hidden; height: 100%;
-          transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+          position: relative; display: block; aspect-ratio: 4/4.6; border-radius: 8px; overflow: hidden;
+          background: var(--steel-2);
+          transition: transform .3s ease, box-shadow .3s ease;
         }
-        .sg :global(.sg-card:hover) { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(22,32,46,0.1); border-color: var(--line-strong); }
-        .sg-media { position: relative; aspect-ratio: 16/10; background: var(--bg-soft); overflow: hidden; }
-        .sg :global(.sg-img) { object-fit: cover; transition: transform .5s ease; }
-        .sg :global(.sg-card:hover) :global(.sg-img) { transform: scale(1.06); }
-        .sg-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--ink-2); background: var(--bg-soft); }
-        .sg-ph.conf { color: var(--accent); }
-        .conf-tag { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.16em; font-weight: 700; }
-        .sg-num { position: absolute; top: 14px; left: 14px; font-family: var(--font-display); font-size: 12px; font-weight: 700; color: #fff; background: rgba(22,32,46,0.78); backdrop-filter: blur(4px); padding: 5px 11px; border-radius: 3px; letter-spacing: 0.06em; }
-        .sg-count { position: absolute; right: 12px; bottom: 12px; font-family: var(--font-display); font-size: 11.5px; font-weight: 600; color: #fff; background: rgba(22,32,46,0.78); backdrop-filter: blur(4px); padding: 5px 11px; border-radius: 100px; }
-        .sg-body { padding: 24px 22px 26px; display: flex; flex-direction: column; flex: 1; }
-        .sg-title { font-family: var(--font-display); font-size: 21px; font-weight: 700; margin-bottom: 9px; color: var(--ink); }
-        .sg-short { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; flex: 1; margin-bottom: 18px; }
-        .sg-link { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--accent); }
-        @media (max-width: 820px) { .sg { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 520px) { .sg { grid-template-columns: 1fr; } }
+        .sg :global(.sg-card:hover) { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(22,32,46,0.22); }
+        .sg :global(.sg-img) { object-fit: cover; transition: transform .55s ease; }
+        .sg :global(.sg-card:hover) :global(.sg-img) { transform: scale(1.07); }
+        .sg-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,30,44,0.2) 0%, rgba(20,30,44,0.08) 30%, rgba(15,22,32,0.62) 55%, rgba(15,22,32,0.9) 78%, rgba(13,19,28,0.96) 100%); }
+        .sg-conf { position: absolute; inset: 0 0 42% 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #ff7a6b; z-index: 1; }
+        .sg-conf-tag { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.16em; font-weight: 700; }
+        .sg-num { position: absolute; top: 16px; left: 16px; font-family: var(--font-display); font-size: 12px; font-weight: 700; color: #fff; background: rgba(15,20,28,0.6); backdrop-filter: blur(4px); padding: 5px 11px; border-radius: 3px; letter-spacing: 0.06em; }
+        .sg-count { position: absolute; top: 16px; right: 16px; font-family: var(--font-display); font-size: 11.5px; font-weight: 600; color: #fff; background: rgba(15,20,28,0.6); backdrop-filter: blur(4px); padding: 5px 11px; border-radius: 100px; }
+        .sg-info { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 22px 24px; color: #fff; }
+        .sg-title { font-family: var(--font-display); font-size: 21px; font-weight: 700; color: #fff; margin-bottom: 7px; text-shadow: 0 1px 10px rgba(10,15,22,0.65); }
+        .sg-short { font-size: 13.5px; color: #d3dae3; line-height: 1.5; margin-bottom: 14px; text-shadow: 0 1px 8px rgba(10,15,22,0.65); }
+        .sg-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 14px; font-weight: 700; color: #ff8a80; }
+        .sg-arrow { transition: transform .25s ease; }
+        .sg :global(.sg-card:hover) .sg-arrow { transform: translateX(5px); }
+        @media (max-width: 960px) { .sg { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 520px) {
+          .sg { grid-template-columns: 1fr; }
+          .sg :global(.sg-card) { aspect-ratio: 4/3.4; }
+        }
       `}</style>
     </div>
   );

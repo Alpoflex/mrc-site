@@ -3,6 +3,17 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { services } from "../data/site";
+
+// Kategori kısayolları — /projeler sayfasına ilgili filtreyle gider
+const catChips = services
+  .filter((s) => s.gallery.length > 0 || (s.videos && s.videos.length > 0))
+  .map((s) => ({
+    key: s.slug,
+    label: s.title,
+    count: s.gallery.length + (s.videos ? s.videos.length : 0),
+  }));
+const videoCount = services.reduce((n, s) => n + (s.videos ? s.videos.length : 0), 0);
 
 // Ana sayfa vitrini — seçme işler. Büyük karo sessiz döngüde canlı oynar,
 // tüm karolar lightbox'ta açılır.
@@ -22,11 +33,17 @@ export default function HomeShowcase() {
   const [lb, setLb] = useState(null);
   const touchX = useRef(null);
   const liveRef = useRef(null);
+  const lbCloseRef = useRef(null);
 
-  // Canlı karo görünür olduğunda oynat, ekran dışına çıkınca durdur
+  // Canlı karo görünür olduğunda oynat, ekran dışına çıkınca durdur.
+  // Hareket azaltma tercihi olan kullanıcıda hiç otomatik oynatma.
   useEffect(() => {
     const v = liveRef.current;
     if (!v) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      v.pause();
+      return;
+    }
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) v.play().catch(() => {});
@@ -55,6 +72,7 @@ export default function HomeShowcase() {
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    lbCloseRef.current?.focus();
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
   }, [lb, close, next, prev]);
 
@@ -101,13 +119,24 @@ export default function HomeShowcase() {
         ))}
       </div>
 
+      <div className="sc-chips">
+        {catChips.map((c) => (
+          <Link key={c.key} href={`/projeler/?k=${c.key}`} className="sc-chip">
+            {c.label} <span className="sc-chip-n">{c.count}</span>
+          </Link>
+        ))}
+        <Link href="/projeler/?k=videos" className="sc-chip">
+          Videolar <span className="sc-chip-n">{videoCount}</span>
+        </Link>
+      </div>
+
       <div className="sc-cta">
         <Link href="/projeler" className="btn btn-light">Tüm çalışmaları inceleyin →</Link>
       </div>
 
       {lb != null && items[lb] && (
-        <div className="lb" onClick={close} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-          <button className="lb-x" onClick={close} aria-label="Kapat">✕</button>
+        <div className="lb" role="dialog" aria-modal="true" aria-label="Proje galerisi görüntüleyici" onClick={close} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+          <button ref={lbCloseRef} className="lb-x" onClick={close} aria-label="Kapat">✕</button>
           <button className="lb-nav lb-p" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Önceki">‹</button>
           <div className="lb-stage" onClick={(e) => e.stopPropagation()}>
             {items[lb].type === "image" ? (
@@ -144,7 +173,11 @@ export default function HomeShowcase() {
         .sc-label { position: absolute; left: 12px; bottom: 12px; font-family: var(--font-display); font-size: 12px; font-weight: 600; color: #fff; background: rgba(15,20,28,0.75); backdrop-filter: blur(4px); padding: 5px 11px; border-radius: 3px; opacity: 0; transform: translateY(6px); transition: all .25s ease; }
         .sc-cell:hover .sc-label { opacity: 1; transform: none; }
         .sc-cell.sc-feat .sc-label { opacity: 1; transform: none; }
-        .sc-cta { display: flex; justify-content: center; margin-top: 36px; }
+        .sc-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
+        .sc-chips :global(.sc-chip) { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 13.5px; font-weight: 600; color: #cfd6df; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); padding: 12px 18px; border-radius: 100px; transition: all .2s ease; }
+        .sc-chips :global(.sc-chip:hover) { color: #fff; border-color: var(--accent); background: rgba(211,45,39,0.15); }
+        .sc-chip-n { font-size: 11.5px; font-weight: 700; color: #fff; background: var(--accent); border-radius: 100px; padding: 2px 8px; }
+        .sc-cta { display: flex; justify-content: center; margin-top: 24px; }
         .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; }
         .lb-stage { position: relative; max-width: 92vw; max-height: 88vh; }
         :global(.lb-img) { max-width: 92vw; max-height: 88vh; width: auto; height: auto; object-fit: contain; border-radius: 4px; }
@@ -159,6 +192,10 @@ export default function HomeShowcase() {
           .sc-play { width: 44px; height: 44px; font-size: 15px; }
           .lb-nav { width: 42px; height: 42px; font-size: 22px; } .lb-p { left: 8px; } .lb-n { right: 8px; }
         }
+        @media (hover: none) {
+          .sc-label { opacity: 1; transform: none; }
+        }
+        .sc-cell:focus-visible .sc-label { opacity: 1; transform: none; }
         @media (prefers-reduced-motion: reduce) {
           .sc-dot { animation: none; }
         }

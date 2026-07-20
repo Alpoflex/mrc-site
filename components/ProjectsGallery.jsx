@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { services } from "../data/site";
 
 // Galerisi olan hizmetlerden proje havuzu oluştur (görsel + video)
@@ -23,6 +24,16 @@ export default function ProjectsGallery() {
   const [filter, setFilter] = useState("all");
   const [lb, setLb] = useState(null);
   const touchX = useRef(null);
+  const lbCloseRef = useRef(null);
+  const searchParams = useSearchParams();
+
+  // Anasayfadaki kategori çiplerinden ?k=slug ile gelindiyse filtreyi uygula;
+  // aynı rota içi gezinmede (geri/ileri, header linki) URL ile senkron kal
+  useEffect(() => {
+    const k = searchParams.get("k");
+    setFilter(k && categories.some((c) => c.key === k) ? k : "all");
+    setLb(null);
+  }, [searchParams]);
 
   const items = useMemo(() => {
     if (filter === "all") return allItems;
@@ -43,6 +54,7 @@ export default function ProjectsGallery() {
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    lbCloseRef.current?.focus();
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
   }, [lb, close, next, prev]);
 
@@ -50,7 +62,7 @@ export default function ProjectsGallery() {
     <div>
       <div className="filters">
         {categories.map((c) => (
-          <button key={c.key} className={`fbtn ${filter === c.key ? "active" : ""}`} onClick={() => { setFilter(c.key); setLb(null); }}>
+          <button key={c.key} className={`fbtn ${filter === c.key ? "active" : ""}`} aria-pressed={filter === c.key} onClick={() => { setFilter(c.key); setLb(null); }}>
             {c.label}
           </button>
         ))}
@@ -71,6 +83,9 @@ export default function ProjectsGallery() {
       {lb != null && items[lb] && (
         <div
           className="lb"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Proje galerisi görüntüleyici"
           onClick={close}
           onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
           onTouchEnd={(e) => {
@@ -80,7 +95,7 @@ export default function ProjectsGallery() {
             if (Math.abs(dx) > 40) (dx < 0 ? next() : prev());
           }}
         >
-          <button className="lb-x" onClick={close} aria-label="Kapat">✕</button>
+          <button ref={lbCloseRef} className="lb-x" onClick={close} aria-label="Kapat">✕</button>
           <button className="lb-nav lb-p" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Önceki">‹</button>
           <div className="lb-stage" onClick={(e) => e.stopPropagation()}>
             {items[lb].type === "video" ? (
@@ -116,7 +131,8 @@ export default function ProjectsGallery() {
         .pplay-tri { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; padding-left: 4px; box-shadow: 0 6px 20px rgba(0,0,0,0.35); transition: transform .25s ease; }
         .pcell:hover .pplay-tri { transform: scale(1.1); }
         .pcat { position: absolute; left: 12px; bottom: 12px; font-family: var(--font-display); font-size: 12px; font-weight: 600; color: #fff; background: rgba(22,32,46,0.8); backdrop-filter: blur(4px); padding: 5px 11px; border-radius: 3px; opacity: 0; transform: translateY(6px); transition: all .25s ease; }
-        .pcell:hover .pcat { opacity: 1; transform: none; }
+        .pcell:hover .pcat, .pcell:focus-visible .pcat { opacity: 1; transform: none; }
+        @media (hover: none) { .pcat { opacity: 1; transform: none; } }
         .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; }
         .lb-stage { position: relative; max-width: 92vw; max-height: 88vh; }
         :global(.lb-img) { max-width: 92vw; max-height: 88vh; width: auto; height: auto; object-fit: contain; border-radius: 4px; }

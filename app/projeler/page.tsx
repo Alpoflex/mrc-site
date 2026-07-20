@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import PageHero from "../../components/PageHero";
 import ProjectsGallery from "../../components/ProjectsGallery";
 
@@ -17,7 +18,9 @@ export default function Projeler() {
       />
       <section className="section">
         <div className="container">
-          <ProjectsGallery />
+          <Suspense fallback={null}>
+            <ProjectsGallery />
+          </Suspense>
         </div>
       </section>
     </>

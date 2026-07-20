@@ -1,5 +1,9 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# MRC Makine Sanayi — mrcmaksan.com
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+Standart Next.js 14 (App Router) projesi, `output: "export"` ile statik siteye derlenir ve
+GitHub `main` push'unda Vercel otomatik deploy eder.
+
+- Tüm içerik (hizmetler, galeriler, videolar, iletişim) tek dosyadan yönetilir: `data/site.js`
+- Stiller: styled-jsx (client bileşenler) + `app/globals.css`; Tailwind/shadcn YOKTUR
+- `next/image` `unoptimized` modda çalışır (statik export gereği); videolar `public/videos/` altındadır
+- Test: `npm run build` sonra `out/` klasörünü herhangi bir statik sunucuyla aç

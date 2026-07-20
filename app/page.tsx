@@ -12,6 +12,25 @@ export default function Home() {
     <>
       <HomeHero />
 
+      {/* PROJELER VİTRİNİ — müşteri siteye girer girmez işleri görsün */}
+      <section className="section section-dark">
+        <div className="container">
+          <Reveal>
+            <div className="sec-head">
+              <div>
+                <div className="eyebrow" style={{ color: "#ff7a6b" }}>Projelerimiz</div>
+                <h2 className="h2">İşçiliğimizi kendi gözlerinizle görün</h2>
+              </div>
+              <p className="lead sec-head-p" style={{ color: "#9fabbb" }}>
+                Atölyemizden ve sahadan seçtiğimiz kareler; lazer kesimden çelik
+                montaja üretimin her aşaması burada.
+              </p>
+            </div>
+          </Reveal>
+          <HomeShowcase />
+        </div>
+      </section>
+
       {/* TANITIM */}
       <section className="section">
         <div className="container intro-grid">
@@ -63,29 +82,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ÜRETİMDEN KARELER */}
-      <section className="section section-dark">
-        <div className="container">
-          <Reveal>
-            <div className="sec-head">
-              <div>
-                <div className="eyebrow" style={{ color: "#ff7a6b" }}>Üretimden Kareler</div>
-                <h2 className="h2">İşçiliğimizi kendi gözlerinizle görün</h2>
-              </div>
-              <p className="lead sec-head-p" style={{ color: "#9fabbb" }}>
-                Atölyemizden ve sahadan seçtiğimiz kareler; lazer kesimden çelik
-                montaja üretimin her aşaması burada.
-              </p>
-            </div>
-          </Reveal>
-          <HomeShowcase />
-        </div>
-      </section>
-
       <Marquee />
 
       {/* SÜREÇ */}
-      <section className="section">
+      <section className="section section-soft">
         <div className="container">
           <Reveal>
             <div className="eyebrow">Nasıl Çalışıyoruz</div>
@@ -166,7 +166,7 @@ export default function Home() {
         .proc::before { content: ""; position: absolute; top: 7px; left: 8px; right: 8px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--line-strong)); }
         .proc-step { position: relative; padding: 34px 20px 0 0; transition: transform .25s ease; }
         .proc-step:hover { transform: translateY(-4px); }
-        .proc-node { position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); transition: background .25s ease, box-shadow .25s ease; }
+        .proc-node { position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-soft); border: 3px solid var(--accent); transition: background .25s ease, box-shadow .25s ease; }
         .proc-step:hover .proc-node { background: var(--accent); box-shadow: 0 0 0 6px rgba(211,45,39,0.12); }
         .proc-n { font-family: var(--font-display); font-size: 13px; font-weight: 800; color: var(--accent); letter-spacing: 0.14em; }
         .proc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin: 10px 0 8px; }

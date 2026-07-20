@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { posters } from "../data/site";
 
 export default function PosterGallery() {
   const [lb, setLb] = useState(null);
+  const lbCloseRef = useRef(null);
 
   const close = useCallback(() => setLb(null), []);
 
@@ -14,6 +15,7 @@ export default function PosterGallery() {
     const onKey = (e) => { if (e.key === "Escape") close(); };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    lbCloseRef.current?.focus();
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
   }, [lb, close]);
 
@@ -27,8 +29,8 @@ export default function PosterGallery() {
       ))}
 
       {lb != null && posters[lb] && (
-        <div className="lb" onClick={close}>
-          <button className="lb-x" onClick={close} aria-label="Kapat">✕</button>
+        <div className="lb" role="dialog" aria-modal="true" aria-label="Afiş görüntüleyici" onClick={close}>
+          <button ref={lbCloseRef} className="lb-x" onClick={close} aria-label="Kapat">✕</button>
           <Image src={posters[lb].src} alt={posters[lb].alt} width={posters[lb].w} height={posters[lb].h} className="lb-img" onClick={(e) => e.stopPropagation()} />
         </div>
       )}
