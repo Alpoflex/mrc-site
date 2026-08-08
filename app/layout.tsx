@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "@fontsource/archivo/500.css";
 import "@fontsource/archivo/600.css";
 import "@fontsource/archivo/700.css";
@@ -43,7 +44,6 @@ export const metadata: Metadata = {
     images: ["/images/celik/celik-02.jpeg"],
   },
   robots: { index: true, follow: true },
-  other: { "deploy-marker": "gsc-dogrulama-1" },
 };
 
 export const viewport: Viewport = {
@@ -93,6 +93,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Footer />
         <WhatsAppFloat />
         <ScrollExtras />
+        {/* Google Analytics (GA4) */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-ZLCC5KBPKF" strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZLCC5KBPKF');
+        `}</Script>
       </body>
     </html>
   );
