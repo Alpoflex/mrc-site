@@ -10,19 +10,68 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  const s = getService(params.slug);
+  const s = getService(params.slug) as any;
   if (!s) return {};
-  return { title: s.title, description: s.desc };
+  return {
+    title: s.seoTitle || s.title,
+    description: s.seoDesc || s.desc,
+    alternates: { canonical: `/hizmetler/${s.slug}/` },
+    openGraph: {
+      title: `${s.seoTitle || s.title} | MRC Makine Sanayi`,
+      description: s.seoDesc || s.desc,
+      url: `https://mrcmaksan.com/hizmetler/${s.slug}/`,
+      ...(s.cover ? { images: [{ url: s.cover }] } : {}),
+    },
+  };
 }
 
 export default function ServiceDetail({ params }: { params: { slug: string } }) {
-  const s = getService(params.slug);
+  const s = getService(params.slug) as any;
   if (!s) notFound();
 
   const others = services.filter((x) => x.slug !== s.slug).slice(0, 4);
+  const faq: { q: string; a: string }[] = s.faq || [];
+
+  // Hizmet + kırıntı + SSS yapılandırılmış verisi (Google zengin sonuçlar)
+  const jsonLd: object[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: s.title,
+      description: s.seoDesc || s.desc,
+      serviceType: s.title,
+      areaServed: ["Kırıkkale", "Ankara", "Türkiye"],
+      provider: { "@id": "https://mrcmaksan.com/#isletme" },
+      url: `https://mrcmaksan.com/hizmetler/${s.slug}/`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Anasayfa", item: "https://mrcmaksan.com/" },
+        { "@type": "ListItem", position: 2, name: "Hizmetler", item: "https://mrcmaksan.com/hizmetler/" },
+        { "@type": "ListItem", position: 3, name: s.title, item: `https://mrcmaksan.com/hizmetler/${s.slug}/` },
+      ],
+    },
+    ...(faq.length > 0
+      ? [{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }]
+      : []),
+  ];
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <PageHero eyebrow={`Hizmet ${s.n}`} title={s.title} desc={s.short} crumb={s.title} image={s.cover} />
 
       <section className="section">
@@ -34,7 +83,7 @@ export default function ServiceDetail({ params }: { params: { slug: string } }) 
               <p className="lead">{s.longDesc}</p>
 
               <div className="feat-list">
-                {s.features.map((f) => (
+                {s.features.map((f: string) => (
                   <div key={f} className="feat">
                     <span className="feat-mark">✓</span>
                     <span>{f}</span>
@@ -98,8 +147,28 @@ export default function ServiceDetail({ params }: { params: { slug: string } }) 
         </section>
       )}
 
+      {/* SSS */}
+      {faq.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <Reveal>
+              <div className="eyebrow">Sık Sorulan Sorular</div>
+              <h2 className="h2" style={{ marginBottom: 32 }}>{s.title} hakkında merak edilenler</h2>
+            </Reveal>
+            <div className="faq">
+              {faq.map((f) => (
+                <details key={f.q} className="faq-item">
+                  <summary className="faq-q">{f.q}<span className="faq-ico" aria-hidden="true">+</span></summary>
+                  <p className="faq-a">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Diğer hizmetler */}
-      <section className="section">
+      <section className={faq.length > 0 ? "section section-soft" : "section"}>
         <div className="container">
           <Reveal>
             <div className="eyebrow">Diğer Hizmetler</div>
@@ -133,6 +202,14 @@ export default function ServiceDetail({ params }: { params: { slug: string } }) 
         .conf-ico { font-size: 30px; }
         .conf-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 8px; }
         .conf-text { font-size: 15px; color: var(--ink-2); line-height: 1.7; max-width: 640px; }
+        .faq { max-width: 780px; }
+        .faq-item { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); margin-bottom: 12px; padding: 0 22px; }
+        .faq-item[open] { border-color: var(--line-strong); }
+        .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: var(--ink); padding: 18px 0; cursor: pointer; list-style: none; }
+        .faq-q::-webkit-details-marker { display: none; }
+        .faq-ico { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line-strong); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; color: var(--ink-2); transition: all .2s ease; }
+        .faq-item[open] .faq-ico { background: var(--accent); border-color: var(--accent); color: #fff; transform: rotate(45deg); }
+        .faq-a { font-size: 15px; color: var(--ink-2); line-height: 1.7; padding: 0 0 20px; max-width: 680px; }
         .others { display: grid; grid-template-columns: repeat(2,1fr); gap: 0; border-top: 1px solid var(--line); }
         .others .other { display: flex; align-items: center; gap: 18px; padding: 22px 8px; border-bottom: 1px solid var(--line); transition: padding .25s ease; }
         .others .other:nth-child(odd) { border-right: 1px solid var(--line); padding-right: 24px; }

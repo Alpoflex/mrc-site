@@ -5,7 +5,13 @@ import { company } from "../../data/site";
 
 export const metadata = {
   title: "İletişim",
-  description: "MRC Makine Sanayi ile iletişime geçin. Kırıkkale Hacılar. Telefon, e-posta ve teklif formu.",
+  description: "MRC Makine Sanayi ile iletişime geçin: Kırıkkale Hacılar'da çelik konstrüksiyon, lazer kesim ve abkant büküm için telefon, WhatsApp, e-posta ve teklif formu.",
+  alternates: { canonical: "/iletisim/" },
+  openGraph: {
+    title: "İletişim | MRC Makine Sanayi",
+    description: "Projeniz için bize ulaşın — telefon, WhatsApp, e-posta ve teklif formu.",
+    url: "https://mrcmaksan.com/iletisim/",
+  },
 };
 
 export default function Iletisim() {

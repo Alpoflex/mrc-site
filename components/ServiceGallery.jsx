@@ -44,7 +44,7 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
         >
           <Image
             src={it.type === "video" ? it.poster : it.src}
-            alt={`${title} ${i + 1}`}
+            alt={`${title} çalışma örneği ${i + 1} — MRC Makine Sanayi Kırıkkale`}
             fill
             sizes="(max-width:700px) 50vw, 25vw"
             className="cell-img"

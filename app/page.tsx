@@ -7,6 +7,10 @@ import Marquee from "../components/Marquee";
 import Reveal from "../components/Reveal";
 import { processSteps, advantages, sectors } from "../data/site";
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default function Home() {
   return (
     <>

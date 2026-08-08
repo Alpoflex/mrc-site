@@ -52,6 +52,23 @@ export const services = [
       "Sahada montaj ve kurulum",
     ],
     cover: "/images/celik/celik-04.jpeg",
+    seoTitle: "Çelik Konstrüksiyon Kırıkkale",
+    seoDesc:
+      "Kırıkkale'de fabrika, depo ve sanayi tesisleri için çelik konstrüksiyon imalatı ve montajı. Statik projeye uygun üretim, sandviç panel cephe ve çatı.",
+    faq: [
+      {
+        q: "Hangi tür yapılar için çelik konstrüksiyon hizmeti veriyorsunuz?",
+        a: "Fabrika binaları, depolar, atölyeler ve her ölçekte sanayi tesisi için çelik konstrüksiyon imalatı ve montajı yapıyoruz. Sandviç panel cephe ve çatı kaplaması dahil, yapının her aşamasını tek elden yürütüyoruz.",
+      },
+      {
+        q: "Montaj hizmeti de veriyor musunuz?",
+        a: "Evet. Çelik iskeleti atölyemizde üretiyor, sahada kendi ekibimizle montajını yapıyoruz. Üretimden kuruluma tüm süreç tek elden yürüyor.",
+      },
+      {
+        q: "Hangi bölgelere hizmet veriyorsunuz?",
+        a: "Merkezimiz Kırıkkale Hacılar'da. Başta Kırıkkale ve Ankara olmak üzere çevre illere, proje bazında Türkiye'nin her yerine hizmet veriyoruz.",
+      },
+    ],
     gallery: [
       "/images/celik/celik-01.jpeg","/images/celik/celik-02.jpeg","/images/celik/celik-03.jpeg",
       "/images/celik/celik-04.jpeg","/images/celik/celik-05.jpeg","/images/celik/celik-06.jpeg",
@@ -74,6 +91,19 @@ export const services = [
       "Proje yönetimi ve denetim",
     ],
     cover: "/images/insaat/insaat-06.jpeg",
+    seoTitle: "İnşaat & Taahhüt Kırıkkale",
+    seoDesc:
+      "Kırıkkale'de betonarme kaba inşaattan anahtar teslim yapıya inşaat taahhüt: temel, villa, konut sitesi ve apartman projeleri. Keşif ve teklif için bize ulaşın.",
+    faq: [
+      {
+        q: "Anahtar teslim inşaat yapıyor musunuz?",
+        a: "Evet. Temel ve betonarme kaba inşaattan başlayıp anahtar teslim seviyesine kadar tüm süreci üstleniyoruz; planlama, üretim ve denetim tek elden ilerliyor.",
+      },
+      {
+        q: "Hangi tür projeleri üstleniyorsunuz?",
+        a: "Villa, konut sitesi, apartman ve ticari yapılar başta olmak üzere temel ve kolon uygulamalarından komple taahhüde kadar her ölçekte proje yapıyoruz.",
+      },
+    ],
     gallery: [
       "/images/insaat/insaat-01.jpeg","/images/insaat/insaat-02.jpeg","/images/insaat/insaat-03.jpeg",
       "/images/insaat/insaat-04.jpeg","/images/insaat/insaat-05.jpeg","/images/insaat/insaat-06.jpeg",
@@ -98,6 +128,27 @@ export const services = [
       "Pergola ve dekoratif paneller",
     ],
     cover: "/images/lazer/lazer-01.jpeg",
+    seoTitle: "Lazer Kesim Kırıkkale",
+    seoDesc:
+      "Kırıkkale'de fiber lazer kesim: 25 mm'ye kadar hassas sac kesimi, desenli kapı, korkuluk ve dekoratif panel imalatı. Çiziminizi gönderin, fiyat verelim.",
+    faq: [
+      {
+        q: "Kaç mm kalınlığa kadar lazer kesim yapıyorsunuz?",
+        a: "Fiber lazer tezgahımızla 25 mm kalınlığa kadar hassas kesim yapıyoruz. Kalınlık ve malzemeye göre en doğru bilgiyi teknik çiziminiz üzerinden veriyoruz.",
+      },
+      {
+        q: "Hangi malzemeleri kesiyorsunuz?",
+        a: "Siyah sac, paslanmaz çelik ve alüminyum başta olmak üzere metal levhaların kesimini yapıyoruz.",
+      },
+      {
+        q: "Desenli kapı ve korkuluk imalatı yapıyor musunuz?",
+        a: "Evet. Desenli bahçe ve site kapıları, balkon ve merdiven korkulukları, pergola ve dekoratif paneller üretiyoruz; villa, fabrika ve sosyal tesisler için özgün tasarımlar çıkarıyoruz.",
+      },
+      {
+        q: "Lazer kesim fiyatı nasıl belirleniyor?",
+        a: "Fiyat; malzeme cinsi, sac kalınlığı, kesim uzunluğu ve adede göre hesaplanır. DXF/DWG çiziminizi veya ölçülerinizi WhatsApp'tan ya da telefonla iletin, hızlıca fiyatlandıralım.",
+      },
+    ],
     gallery: [
       "/images/lazer/lazer-01.jpeg","/images/lazer/lazer-02.jpeg","/images/lazer/lazer-03.jpeg",
       "/images/lazer/lazer-04.jpeg","/images/lazer/lazer-05.jpeg","/images/lazer/lazer-06.jpeg",
@@ -126,6 +177,23 @@ export const services = [
       "Tekli parçadan seri üretime",
     ],
     cover: "/images/abkant/abkant-12.jpeg",
+    seoTitle: "Abkant Büküm & Sac İşleme Kırıkkale",
+    seoDesc:
+      "Kırıkkale'de abkant büküm ve sac işleme: 10 mm'ye kadar hassas büküm; çelik, paslanmaz ve alüminyum sac şekillendirme. Tekli parçadan seri üretime.",
+    faq: [
+      {
+        q: "Kaç mm kalınlığa kadar abkant büküm yapıyorsunuz?",
+        a: "Abkant presimizle 10 mm kalınlığa kadar sac bükme işlemi yapıyoruz. Teknik çiziminize birebir uygun, hatasız büküm sağlıyoruz.",
+      },
+      {
+        q: "Tek parça sipariş verebilir miyim?",
+        a: "Evet. Tekli parçadan seri üretime kadar her ölçekte sipariş alıyoruz.",
+      },
+      {
+        q: "Hangi malzemeleri büküyorsunuz?",
+        a: "Çelik (siyah sac), paslanmaz ve alüminyum sacların kesimi, bükümü ve şekillendirmesini yapıyoruz.",
+      },
+    ],
     gallery: [
       "/images/abkant/abkant-12.jpeg","/images/abkant/abkant-01.jpeg","/images/abkant/abkant-07.jpeg",
       "/images/abkant/abkant-13.jpeg","/images/abkant/abkant-02.jpeg","/images/abkant/abkant-10.jpeg",
@@ -143,6 +211,9 @@ export const services = [
     title: "Savunma Sanayii",
     short: "Savunma projeleri için hassas parça imalatı",
     desc: "Gizlilik sözleşmeleri gereği görseller paylaşılmamaktadır.",
+    seoTitle: "Savunma Sanayii Hassas Parça İmalatı",
+    seoDesc:
+      "Savunma sanayii projeleri için gizlilik sözleşmesi (NDA) çerçevesinde hassas parça imalatı. Yüksek hassasiyet ve kalite standardıyla üretim. Bize ulaşın.",
     longDesc:
       "Savunma sanayii projeleri kapsamında hassas parça imalatı gerçekleştiriyoruz. İmzalanan gizlilik sözleşmeleri (NDA) gereği üretilen ürün ve parçalara ait görseller paylaşılmamaktadır. Bu alandaki talepleriniz için doğrudan bizimle iletişime geçebilirsiniz.",
     features: [

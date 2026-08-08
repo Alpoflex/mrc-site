@@ -8,6 +8,12 @@ import { advantages, stats, sectors } from "../../data/site";
 export const metadata = {
   title: "Hakkımızda",
   description: "MRC Makine Sanayi — Kırıkkale Hacılar'da çelik konstrüksiyon, lazer kesim, sac işleme ve inşaat taahhüt alanında uçtan uca üretim.",
+  alternates: { canonical: "/hakkimizda/" },
+  openGraph: {
+    title: "Hakkımızda | MRC Makine Sanayi",
+    description: "Kırıkkale Hacılar'da çelik ve sac işlemenin her alanında güvenilir üretim ortağı.",
+    url: "https://mrcmaksan.com/hakkimizda/",
+  },
 };
 
 export default function Hakkimizda() {

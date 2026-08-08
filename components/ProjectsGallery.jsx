@@ -71,7 +71,7 @@ export default function ProjectsGallery() {
       <div className="pgrid">
         {items.map((it, i) => (
           <button key={it.src + i} className="pcell" onClick={() => setLb(i)} aria-label={`${it.catLabel} ${it.type === "video" ? "video" : "görsel"}`}>
-            <Image src={it.type === "video" ? it.poster : it.src} alt={it.catLabel} fill sizes="(max-width:700px) 50vw, 33vw" className="pimg" />
+            <Image src={it.type === "video" ? it.poster : it.src} alt={`${it.catLabel} projesi — MRC Makine Sanayi Kırıkkale`} fill sizes="(max-width:700px) 50vw, 33vw" className="pimg" />
             {it.type === "video" && (
               <span className="pplay"><span className="pplay-tri">▶</span></span>
             )}

@@ -4,7 +4,13 @@ import ProjectsGallery from "../../components/ProjectsGallery";
 
 export const metadata = {
   title: "Projeler",
-  description: "MRC Makine Sanayi'nin çelik konstrüksiyon, inşaat ve lazer kesim alanlarındaki çalışmalarından örnekler.",
+  description: "MRC Makine Sanayi'nin çelik konstrüksiyon, inşaat ve lazer kesim alanlarındaki çalışmalarından fotoğraf ve video örnekleri.",
+  alternates: { canonical: "/projeler/" },
+  openGraph: {
+    title: "Projeler | MRC Makine Sanayi",
+    description: "Çelik konstrüksiyon, inşaat, lazer kesim ve abkant büküm çalışmalarımızdan örnekler.",
+    url: "https://mrcmaksan.com/projeler/",
+  },
 };
 
 export default function Projeler() {

@@ -7,6 +7,12 @@ import { processSteps } from "../../data/site";
 export const metadata = {
   title: "Hizmetler",
   description: "Çelik konstrüksiyon, inşaat & taahhüt, lazer kesim, abkant büküm & sac işleme ve savunma sanayii. MRC Makine Sanayi hizmetleri.",
+  alternates: { canonical: "/hizmetler/" },
+  openGraph: {
+    title: "Hizmetler | MRC Makine Sanayi",
+    description: "Beş uzmanlık alanı, tek üretim ortağı: çelik konstrüksiyon, inşaat, lazer kesim, abkant büküm, savunma sanayii.",
+    url: "https://mrcmaksan.com/hizmetler/",
+  },
 };
 
 export default function Hizmetler() {

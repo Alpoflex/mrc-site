@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | MRC Makine Sanayi",
   },
   description:
-    "Kırıkkale Hacılar'da çelik konstrüksiyon, fiber lazer kesim, abkant büküm, sac işleme ve inşaat taahhüt. Modern makine parkuru, uçtan uca üretim, zamanında teslimat.",
+    "Kırıkkale Hacılar'da çelik konstrüksiyon, fiber lazer kesim, abkant büküm, sac işleme ve inşaat taahhüt. Uçtan uca üretim, zamanında teslimat.",
   keywords: [
     "çelik konstrüksiyon Kırıkkale", "lazer kesim Kırıkkale", "fiber lazer kesim",
     "abkant büküm", "sac işleme", "inşaat taahhüt Kırıkkale", "dekoratif lazer kesim",
@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     description: "Çelik konstrüksiyon, lazer kesim, sac işleme ve inşaatta güvenilir üretim ortağınız.",
     images: ["/images/celik/celik-02.jpeg"],
   },
-  alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
 
@@ -52,10 +51,42 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Google'ın işletmeyi tanıması için yapılandırılmış veri (yerel SEO)
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://mrcmaksan.com/#isletme",
+  name: company.name,
+  url: "https://mrcmaksan.com",
+  telephone: company.phoneIntl,
+  email: company.email,
+  image: "https://mrcmaksan.com/images/celik/celik-02.jpeg",
+  logo: "https://mrcmaksan.com/images/genel/logo.jpeg",
+  description:
+    "Kırıkkale Hacılar'da çelik konstrüksiyon, fiber lazer kesim, abkant büküm, sac işleme ve inşaat taahhüt hizmetleri.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Sağlık Mah. Abdi İpekçi Cad. No:36",
+    addressLocality: "Hacılar",
+    addressRegion: "Kırıkkale",
+    addressCountry: "TR",
+  },
+  hasMap: company.mapUrl,
+  areaServed: ["Kırıkkale", "Ankara", "Türkiye"],
+  knowsAbout: [
+    "çelik konstrüksiyon", "lazer kesim", "fiber lazer kesim",
+    "abkant büküm", "sac işleme", "inşaat taahhüt",
+  ],
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd).replace(/</g, "\\u003c") }}
+        />
         <Header />
         <main>{children}</main>
         <Footer />
