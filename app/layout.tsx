@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     images: ["/images/celik/celik-02.jpeg"],
   },
   robots: { index: true, follow: true },
+  other: { "deploy-marker": "gsc-dogrulama-1" },
 };
 
 export const viewport: Viewport = {
