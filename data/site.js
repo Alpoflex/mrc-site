@@ -108,9 +108,8 @@ export const services = [
       "/images/insaat/insaat-01.jpeg","/images/insaat/insaat-02.jpeg","/images/insaat/insaat-03.jpeg",
       "/images/insaat/insaat-04.jpeg","/images/insaat/insaat-05.jpeg","/images/insaat/insaat-06.jpeg",
       "/images/insaat/insaat-07.jpeg","/images/insaat/insaat-08.jpeg","/images/insaat/insaat-17.jpeg",
-      "/images/insaat/insaat-14.jpeg","/images/insaat/insaat-09.jpeg","/images/insaat/insaat-18.jpeg",
-      "/images/insaat/insaat-10.jpeg","/images/insaat/insaat-15.jpeg","/images/insaat/insaat-11.jpeg",
-      "/images/insaat/insaat-13.jpeg","/images/insaat/insaat-16.jpeg","/images/insaat/insaat-12.jpeg",
+      "/images/insaat/insaat-14.jpeg","/images/insaat/insaat-09.jpeg","/images/insaat/insaat-10.jpeg",
+      "/images/insaat/insaat-11.jpeg","/images/insaat/insaat-13.jpeg",
     ],
   },
   {
@@ -231,6 +230,29 @@ export const services = [
 export const posters = [
   { src: "/images/genel/afis-01.jpeg", alt: "MRC Makine Sanayi — Lazer kesimde hassasiyet neden önemlidir?", w: 1086, h: 1448 },
   { src: "/images/genel/afis-02.jpeg", alt: "MRC Makine Sanayi — Lazer kesim, abkant büküm, kaynaklı imalat", w: 1023, h: 1537 },
+];
+
+// Yaptığımız yapı türleri — görseller yapay zekâ ile üretilmiş temsili görsellerdir,
+// gerçek proje fotoğrafı değildir; sitede "Temsili görsel" etiketiyle gösterilir.
+export const structureTypes = [
+  {
+    title: "Çelik Fabrika Binaları",
+    desc: "Üretim tesisleri için statik projeye uygun çelik iskelet, çatı makası ve sandviç panel kaplama — imalattan sahada montaja.",
+    image: "/images/temsili/celik-fabrika.jpeg",
+    href: "/hizmetler/celik-konstruksiyon/",
+  },
+  {
+    title: "Depo & Lojistik Yapıları",
+    desc: "Geniş açıklıklı çelik depolar, antrepolar ve lojistik merkezleri; hızlı montaj, uzun ömürlü yapı.",
+    image: "/images/temsili/depo.jpeg",
+    href: "/hizmetler/celik-konstruksiyon/",
+  },
+  {
+    title: "Mandıra & Hayvancılık Tesisleri",
+    desc: "Süt çiftlikleri, ahır ve besi tesisleri için havalandırmaya uygun, dayanıklı galvaniz çelik yapılar.",
+    image: "/images/temsili/mandira.jpeg",
+    href: "/hizmetler/celik-konstruksiyon/",
+  },
 ];
 
 export const sectors = [

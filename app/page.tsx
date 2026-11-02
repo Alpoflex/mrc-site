@@ -4,6 +4,7 @@ import HomeHero from "../components/HomeHero";
 import ServicesGrid from "../components/ServicesGrid";
 import HomeShowcase from "../components/HomeShowcase";
 import Marquee from "../components/Marquee";
+import StructureTypes from "../components/StructureTypes";
 import Reveal from "../components/Reveal";
 import { processSteps, advantages, sectors } from "../data/site";
 
@@ -83,6 +84,25 @@ export default function Home() {
             </div>
           </Reveal>
           <ServicesGrid />
+        </div>
+      </section>
+
+      {/* YAPI TÜRLERİ */}
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <div className="sec-head">
+              <div>
+                <div className="eyebrow">Yaptığımız Yapılar</div>
+                <h2 className="h2">Fabrikadan mandıraya, her ölçekte çelik yapı</h2>
+              </div>
+              <p className="lead sec-head-p">
+                Sanayi tesislerinden depo ve hayvancılık yapılarına kadar projenizi
+                atölyemizde üretip sahada anahtar teslim kuruyoruz.
+              </p>
+            </div>
+          </Reveal>
+          <StructureTypes />
         </div>
       </section>
 
