@@ -127,7 +127,9 @@ export default function Header() {
         .nav-d :global(.nav-l) { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: var(--ink-2); transition: color .2s; position: relative; padding: 4px 0; white-space: nowrap; }
         .nav-d :global(.nav-l):hover { color: var(--ink); }
         .nav-d :global(.nav-l.active) { color: var(--ink); }
-        .nav-d :global(.nav-l.active)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--accent); }
+        .nav-d :global(.nav-l)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform .35s cubic-bezier(.2,.75,.2,1); }
+        .nav-d :global(.nav-l):hover::after { transform: scaleX(1); transform-origin: left; }
+        .nav-d :global(.nav-l.active)::after { transform: scaleX(1); }
         .hdr-in :global(.hdr-cta) { margin-left: 8px; padding: 11px 22px; flex-shrink: 0; }
         .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; flex-shrink: 0; }
         .burger span { width: 24px; height: 2px; background: var(--ink); transition: all .3s; display: block; }

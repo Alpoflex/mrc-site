@@ -46,6 +46,8 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="ft-mark" aria-hidden="true">MRC MAKİNE SANAYİ</div>
+
         <div className="ft-bottom">
           <span>© {new Date().getFullYear()} {company.name}</span>
           <span>Tüm hakları saklıdır. Alperen Ertaş.</span>
@@ -65,6 +67,8 @@ export default function Footer() {
         .ft-col li, .ft-col li :global(a) { font-size: 14px; color: #9fabbb; transition: color .2s; line-height: 1.45; }
         .ft-col li :global(a):hover { color: #fff; }
         .ft-contact li a { display: inline-block; }
+        .ft-mark { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 8.6vw, 112px); line-height: 0.9; letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-align: center; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.16); padding: 40px 0 24px; user-select: none; transition: -webkit-text-stroke-color .4s ease; }
+        .ft-mark:hover { -webkit-text-stroke-color: rgba(211,45,39,0.75); }
         .ft-bottom { display: flex; justify-content: space-between; padding-top: 22px; padding-bottom: 12px; font-size: 13px; color: #7f8b9c; flex-wrap: wrap; gap: 8px; }
         @media (max-width: 860px) { .ft-top { grid-template-columns: 1fr 1fr; gap: 32px; } }
         @media (max-width: 600px) {

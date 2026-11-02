@@ -61,6 +61,8 @@ export default function ServicesGrid() {
           transition: transform .3s ease, box-shadow .3s ease;
         }
         .sg :global(.sg-card:hover) { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(22,32,46,0.22); }
+        .sg :global(.sg-card)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2,.75,.2,1); z-index: 2; }
+        .sg :global(.sg-card:hover)::after { transform: scaleX(1); }
         .sg :global(.sg-img) { object-fit: cover; transition: transform .55s ease; }
         .sg :global(.sg-card:hover) :global(.sg-img) { transform: scale(1.07); }
         .sg-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,30,44,0.2) 0%, rgba(20,30,44,0.08) 30%, rgba(15,22,32,0.62) 55%, rgba(15,22,32,0.9) 78%, rgba(13,19,28,0.96) 100%); }

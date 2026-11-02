@@ -51,7 +51,7 @@ export default function Hakkimizda() {
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <div className="ab-img-wrap">
+            <div className="ab-img-wrap img-wipe">
               <Image src="/images/celik/celik-03.jpeg" alt="MRC üretim" width={520} height={640} className="ab-img" />
             </div>
           </Reveal>

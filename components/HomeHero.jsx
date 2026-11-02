@@ -31,6 +31,25 @@ function StatNum({ value }) {
 
 export default function HomeHero() {
   const videoRef = useRef(null);
+  const mediaRef = useRef(null);
+
+  // Kaydırırken arka plan videosu içerikten daha yavaş kayar (paralaks)
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = window.scrollY;
+        if (mediaRef.current && y < window.innerHeight * 1.2) {
+          mediaRef.current.style.transform = `translate3d(0, ${y * 0.32}px, 0)`;
+        }
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.removeEventListener("scroll", onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, []);
 
   // Sekme arka plana alınıp geri gelince tarayıcının duraklattığı videoyu sürdür
   useEffect(() => {
@@ -43,7 +62,7 @@ export default function HomeHero() {
 
   return (
     <section className="hero">
-      <div className="hero-media">
+      <div className="hero-media" ref={mediaRef}>
         <Image
           src="/images/celik/celik-02.jpeg"
           alt="MRC Makine Sanayi çelik konstrüksiyon üretimi"
@@ -66,15 +85,17 @@ export default function HomeHero() {
           tabIndex={-1}
         />
         <div className="hero-overlay" />
+        <div className="hero-grain grain" aria-hidden="true" />
       </div>
 
       <div className="container hero-in">
         <div className="hero-content">
           <div className="eyebrow hero-up hero-d1" style={{ color: "#ff7a6b" }}>{company.location}</div>
-          <h1 className="h1 hero-title hero-up hero-d2">
-            Çelikte ve sac işlemede<br />
-            <span className="hero-accent">uçtan uca üretim ortağınız</span>
+          <h1 className="h1 hero-title">
+            <span className="hl"><span className="hl-in hl-d1">Çelikte ve sac işlemede</span></span>
+            <span className="hl"><span className="hl-in hl-d2">uçtan uca üretim ortağınız</span></span>
           </h1>
+          <span className="hero-bar" aria-hidden="true" />
           <p className="hero-lead hero-up hero-d3">
             Çelik konstrüksiyon, fiber lazer kesim, abkant büküm, sac işleme ve inşaat
             taahhüt. Modern makine parkuru ve uzman kadromuzla projenizi baştan sona
@@ -108,6 +129,11 @@ export default function HomeHero() {
         .hero-media { position: absolute; inset: 0; overflow: hidden; }
         :global(.hero-img) { object-fit: cover; }
         .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        /* Arka plan çok yavaş yakınlaşır (sinematik Ken Burns) */
+        .hero-video, .hero-media :global(.hero-img) { animation: kenBurns 26s ease-in-out infinite alternate; transform-origin: 60% 50%; }
+        @keyframes kenBurns { from { transform: scale(1); } to { transform: scale(1.09); } }
+        .hero-media { will-change: transform; }
+        .hero-grain { position: absolute; inset: 0; }
         .hero-overlay {
           position: absolute; inset: 0;
           background:
@@ -117,9 +143,14 @@ export default function HomeHero() {
         /* Üstte sabit şeffaf header'ın (üst şerit + menü) altında kalmaması için */
         .hero-in { position: relative; flex: 1; width: 100%; display: flex; align-items: center; padding: calc(var(--header-h) + 38px + clamp(32px, 6vw, 72px)) 24px clamp(48px, 7vw, 88px); }
         .hero-content { max-width: 1040px; }
-        .hero-title { color: #fff; margin-bottom: 26px; font-size: clamp(40px, 6.2vw, 82px); line-height: 1.02; letter-spacing: -0.03em; }
-        .hero-accent { color: #fff; position: relative; }
-        .hero-accent::after { content: ""; display: block; width: 88px; height: 4px; background: var(--accent); margin-top: 22px; }
+        .hero-title { color: #fff; margin-bottom: 24px; font-size: clamp(40px, 6.2vw, 82px); line-height: 1.04; letter-spacing: -0.03em; }
+        /* Satır maskesi: her satır kendi kutusunun altından yukarı kayarak açılır */
+        .hl { display: block; overflow: hidden; padding-bottom: 0.06em; }
+        .hl-in { display: block; transform: translateY(108%); animation: lineUp 1s cubic-bezier(.2,.75,.2,1) forwards; text-wrap: balance; }
+        .hl-d1 { animation-delay: .15s; } .hl-d2 { animation-delay: .3s; }
+        @keyframes lineUp { to { transform: none; } }
+        .hero-bar { display: block; width: 88px; height: 4px; background: var(--accent); margin-bottom: 28px; transform: scaleX(0); transform-origin: left; animation: barIn .8s cubic-bezier(.2,.75,.2,1) .7s forwards; }
+        @keyframes barIn { to { transform: scaleX(1); } }
         .hero-lead { font-size: clamp(16px, 1.9vw, 20px); color: #d0d7e0; max-width: 620px; line-height: 1.7; margin-bottom: 38px; }
         .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
         .hero-up { opacity: 0; transform: translateY(22px); animation: heroUp .7s cubic-bezier(.2,.7,.3,1) forwards; }
@@ -131,6 +162,8 @@ export default function HomeHero() {
         @keyframes scrollDrip { to { top: 110%; } }
         @media (prefers-reduced-motion: reduce) {
           .hero-up { opacity: 1; transform: none; animation: none; }
+          .hl-in, .hero-bar { transform: none; animation: none; }
+          .hero-video, .hero-media :global(.hero-img) { animation: none; }
           .hero-scroll-line::after { animation: none; }
         }
         /* İstatistikler: videonun altında buzlu cam panel */
@@ -152,7 +185,6 @@ export default function HomeHero() {
         @media (max-width: 700px) { .hero-scroll { display: none; } }
         @media (max-width: 500px) {
           .hero-in { padding-top: calc(var(--header-h) + 32px + 36px); }
-          .hero-title br { display: none; }
         }
         @media (max-width: 400px) {
           .hero-stats-in { grid-template-columns: 1fr 1fr; gap: 0; }

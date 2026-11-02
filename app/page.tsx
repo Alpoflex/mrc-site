@@ -40,7 +40,7 @@ export default function Home() {
       <section className="section">
         <div className="container intro-grid">
           <Reveal>
-            <div className="intro-img">
+            <div className="intro-img img-wipe">
               <Image src="/images/celik/celik-06.jpeg" alt="Üretim tesisi" width={560} height={620} className="i-img" />
             </div>
           </Reveal>
@@ -189,6 +189,11 @@ export default function Home() {
         .sec-head-p { max-width: 440px; padding-bottom: 6px; }
         .proc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
         .proc::before { content: ""; position: absolute; top: 7px; left: 8px; right: 8px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--line-strong)); }
+        /* Destekleyen tarayıcılarda çizgi kaydırdıkça kendini çizer */
+        @supports (animation-timeline: view()) {
+          .proc::before { transform-origin: left; animation: procDraw linear both; animation-timeline: view(); animation-range: entry 5% cover 45%; }
+          @keyframes procDraw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        }
         .proc-step { position: relative; padding: 34px 20px 0 0; transition: transform .25s ease; }
         .proc-step:hover { transform: translateY(-4px); }
         .proc-node { position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-soft); border: 3px solid var(--accent); transition: background .25s ease, box-shadow .25s ease; }

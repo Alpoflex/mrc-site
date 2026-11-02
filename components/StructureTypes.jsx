@@ -32,6 +32,9 @@ export default function StructureTypes() {
           transition: transform .3s ease, box-shadow .3s ease;
         }
         .st :global(.st-card:hover) { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(22,32,46,0.14); }
+        .st :global(.st-card) { position: relative; }
+        .st :global(.st-card)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2,.75,.2,1); }
+        .st :global(.st-card:hover)::after { transform: scaleX(1); }
         .st-media { position: relative; aspect-ratio: 3/2; overflow: hidden; background: var(--bg-soft); }
         .st :global(.st-img) { object-fit: cover; transition: transform .55s ease; }
         .st :global(.st-card:hover) :global(.st-img) { transform: scale(1.06); }
