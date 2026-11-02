@@ -130,8 +130,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NEDEN BİZ + SEKTÖRLER (koyu) */}
-      <section className="section section-dark">
+      {/* NEDEN BİZ + SEKTÖRLER (koyu, çelik iskelet fotoğraflı) */}
+      <section className="section section-dark why-sec">
         <div className="container why-grid">
           <Reveal>
             <div>
@@ -184,8 +184,9 @@ export default function Home() {
         .intro-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
         .intro-img { position: relative; }
         .i-img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; box-shadow: 0 20px 50px rgba(22,32,46,0.12); }
-        .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 44px; flex-wrap: wrap; }
-        .sec-head-p { max-width: 420px; }
+        .sec-head { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: end; gap: 24px clamp(32px, 6vw, 80px); margin-bottom: clamp(36px, 5vw, 56px); }
+        .sec-head .h2 { margin-bottom: 0; }
+        .sec-head-p { max-width: 440px; padding-bottom: 6px; }
         .proc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
         .proc::before { content: ""; position: absolute; top: 7px; left: 8px; right: 8px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--line-strong)); }
         .proc-step { position: relative; padding: 34px 20px 0 0; transition: transform .25s ease; }
@@ -195,13 +196,15 @@ export default function Home() {
         .proc-n { font-family: var(--font-display); font-size: 13px; font-weight: 800; color: var(--accent); letter-spacing: 0.14em; }
         .proc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin: 10px 0 8px; }
         .proc-desc { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+        .why-sec { position: relative; overflow: hidden; background-image: linear-gradient(90deg, rgba(22,32,46,0.97) 0%, rgba(22,32,46,0.9) 50%, rgba(22,32,46,0.72) 100%), url('/images/celik/celik-07.jpeg'); background-size: cover; background-position: center; }
+        .why-sec .container { position: relative; }
         .why-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
         .adv-list { display: flex; flex-direction: column; gap: 22px; margin-top: 30px; }
         .adv { display: flex; gap: 16px; align-items: flex-start; }
-        .adv-mark { flex-shrink: 0; width: 28px; height: 28px; border: 1px solid rgba(255,255,255,0.25); border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; color: #ff7a6b; font-weight: 700; font-size: 14px; }
+        .adv-mark { flex-shrink: 0; width: 30px; height: 30px; background: var(--accent); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 13px; box-shadow: 0 0 0 5px rgba(211,45,39,0.18); }
         .adv-title { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 4px; }
         .adv-desc { font-size: 14.5px; color: #9fabbb; line-height: 1.6; }
-        .sectors-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 30px 28px; }
+        .sectors-box { background: rgba(12,18,27,0.55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 30px 28px; }
         .sectors-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 20px; }
         .sectors { display: flex; flex-wrap: wrap; gap: 10px; }
         .sector-chip { font-size: 13.5px; color: #cfd6df; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 100px; }
@@ -223,12 +226,12 @@ export default function Home() {
           .proc { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
           .proc::before { display: none; }
           .why-grid { grid-template-columns: 1fr; }
+          .sec-head { grid-template-columns: 1fr; align-items: start; }
         }
         @media (max-width: 520px) {
           .proc { grid-template-columns: 1fr; gap: 26px; }
           .proc-step { padding-left: 30px; padding-top: 0; }
           .proc-node { top: 3px; }
-          .sec-head { flex-direction: column; align-items: flex-start; gap: 16px; }
           .sec-head-p { max-width: 100%; }
         }
       ` }} />

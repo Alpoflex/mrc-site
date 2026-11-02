@@ -104,20 +104,23 @@ export default function HomeHero() {
       </div>
 
       <style jsx>{`
-        .hero { position: relative; background: var(--steel-2); overflow: hidden; }
+        .hero { position: relative; background: var(--steel-2); overflow: hidden; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
         .hero-media { position: absolute; inset: 0; overflow: hidden; }
         :global(.hero-img) { object-fit: cover; }
         .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         .hero-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(105deg, rgba(20,32,46,0.94) 0%, rgba(20,32,46,0.82) 45%, rgba(20,32,46,0.5) 100%);
+          background:
+            linear-gradient(180deg, rgba(12,18,27,0.35) 0%, rgba(12,18,27,0) 30%, rgba(12,18,27,0) 62%, rgba(12,18,27,0.85) 100%),
+            linear-gradient(100deg, rgba(18,28,41,0.93) 0%, rgba(18,28,41,0.78) 42%, rgba(18,28,41,0.35) 100%);
         }
-        .hero-in { position: relative; padding: clamp(70px, 11vw, 130px) 24px clamp(60px, 9vw, 110px); }
-        .hero-content { max-width: 720px; }
-        .hero-title { color: #fff; margin-bottom: 26px; }
+        /* Üstte sabit şeffaf header'ın (üst şerit + menü) altında kalmaması için */
+        .hero-in { position: relative; flex: 1; width: 100%; display: flex; align-items: center; padding: calc(var(--header-h) + 38px + clamp(32px, 6vw, 72px)) 24px clamp(48px, 7vw, 88px); }
+        .hero-content { max-width: 1040px; }
+        .hero-title { color: #fff; margin-bottom: 26px; font-size: clamp(40px, 6.2vw, 82px); line-height: 1.02; letter-spacing: -0.03em; }
         .hero-accent { color: #fff; position: relative; }
         .hero-accent::after { content: ""; display: block; width: 88px; height: 4px; background: var(--accent); margin-top: 22px; }
-        .hero-lead { font-size: clamp(16px, 2vw, 19px); color: #c5cdd8; max-width: 600px; line-height: 1.7; margin-bottom: 36px; }
+        .hero-lead { font-size: clamp(16px, 1.9vw, 20px); color: #d0d7e0; max-width: 620px; line-height: 1.7; margin-bottom: 38px; }
         .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
         .hero-up { opacity: 0; transform: translateY(22px); animation: heroUp .7s cubic-bezier(.2,.7,.3,1) forwards; }
         .hero-d1 { animation-delay: .1s; } .hero-d2 { animation-delay: .22s; } .hero-d3 { animation-delay: .36s; } .hero-d4 { animation-delay: .5s; }
@@ -130,19 +133,27 @@ export default function HomeHero() {
           .hero-up { opacity: 1; transform: none; animation: none; }
           .hero-scroll-line::after { animation: none; }
         }
-        .hero-stats { position: relative; background: var(--accent); }
+        /* İstatistikler: videonun altında buzlu cam panel */
+        .hero-stats { position: relative; background: rgba(12,18,27,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,0.1); }
         .hero-stats-in { display: grid; grid-template-columns: repeat(4, 1fr); }
-        .hstat { padding: 26px 20px; border-right: 1px solid rgba(255,255,255,0.18); }
+        .hstat { position: relative; padding: 28px 24px 26px; border-right: 1px solid rgba(255,255,255,0.1); }
+        .hstat::before { content: ""; position: absolute; left: 24px; top: -1px; width: 32px; height: 3px; background: var(--accent); }
+        .hstat:first-child { padding-left: 0; } .hstat:first-child::before { left: 0; }
         .hstat:last-child { border-right: none; }
-        .hstat-num { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.02em; }
-        .hstat-unit { font-size: 0.5em; font-weight: 700; margin-left: 2px; }
-        .hstat-label { font-size: 13px; color: rgba(255,255,255,0.85); margin-top: 8px; line-height: 1.3; }
+        .hstat-num { font-family: var(--font-display); font-size: clamp(30px, 4vw, 44px); font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.02em; }
+        .hstat-unit { font-size: 0.45em; font-weight: 700; margin-left: 3px; color: #ff7a6b; }
+        .hstat-label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 9px; line-height: 1.3; }
         @media (max-width: 760px) {
           .hero-stats-in { grid-template-columns: 1fr 1fr; }
+          .hstat:nth-child(odd) { padding-left: 0; } .hstat:nth-child(odd)::before { left: 0; }
           .hstat:nth-child(2) { border-right: none; }
-          .hstat:nth-child(1), .hstat:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.18); }
+          .hstat:nth-child(1), .hstat:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.1); }
         }
         @media (max-width: 700px) { .hero-scroll { display: none; } }
+        @media (max-width: 500px) {
+          .hero-in { padding-top: calc(var(--header-h) + 32px + 36px); }
+          .hero-title br { display: none; }
+        }
         @media (max-width: 400px) {
           .hero-stats-in { grid-template-columns: 1fr 1fr; gap: 0; }
           .hstat { padding: 20px 14px; }

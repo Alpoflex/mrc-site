@@ -34,6 +34,10 @@ export default function Header() {
   const norm = (s) => (s && s.length > 1 ? s.replace(/\/+$/, "") : s);
   const isActive = (href) => norm(pathname) === norm(href);
 
+  // Anasayfada header video hero'nun üzerinde şeffaf durur, kaydırınca katılaşır
+  const isHome = norm(pathname) === "/";
+  const overlay = isHome && !scrolled && !open;
+
   // Menü açıkken arka plan kaymasını kilitle
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -41,7 +45,7 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className={`hdr ${scrolled ? "scrolled" : ""} ${open ? "menu-open" : ""}`}>
+    <header className={`hdr ${scrolled ? "scrolled" : ""} ${open ? "menu-open" : ""} ${isHome ? "hdr-home" : ""} ${overlay ? "hdr-over" : ""}`}>
       {/* Üst ince iletişim şeridi */}
       <div className="topbar">
         <div className="container topbar-in">
@@ -97,9 +101,18 @@ export default function Header() {
       </nav>
 
       <style jsx>{`
-        .hdr { position: sticky; top: 0; z-index: 50; background: var(--bg); transition: box-shadow .25s ease; }
+        .hdr { position: sticky; top: 0; z-index: 50; background: var(--bg); transition: box-shadow .25s ease, background-color .35s ease; }
         .hdr.menu-open { z-index: 110; }
         .hdr.scrolled { box-shadow: 0 1px 0 var(--line), 0 8px 24px rgba(22,32,46,0.05); }
+
+        /* Anasayfa: hero'nun üzerinde şeffaf header */
+        .hdr.hdr-home { position: fixed; left: 0; right: 0; }
+        .hdr.hdr-over { background-color: transparent; background-image: linear-gradient(180deg, rgba(10,15,22,0.6) 0%, rgba(10,15,22,0) 100%); }
+        .hdr.hdr-over .topbar { background: transparent; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .hdr-over .nav-d :global(.nav-l) { color: rgba(255,255,255,0.8); }
+        .hdr-over .nav-d :global(.nav-l):hover, .hdr-over .nav-d :global(.nav-l.active) { color: #fff; }
+        .hdr-over .burger span { background: #fff; }
+        .topbar { transition: background-color .35s ease; }
         .topbar { background: var(--steel-2); color: #fff; font-size: 12.5px; }
         .topbar-in { display: flex; align-items: center; justify-content: space-between; height: 38px; }
         .topbar-loc { color: #aeb9c7; letter-spacing: 0.04em; font-family: var(--font-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 12px; }
