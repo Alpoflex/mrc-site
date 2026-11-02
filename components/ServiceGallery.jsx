@@ -107,8 +107,8 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
         .play-tri { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; padding-left: 4px; box-shadow: 0 6px 20px rgba(0,0,0,0.35); transition: transform .25s ease; }
         .cell:hover .play-tri { transform: scale(1.1); }
         .play-txt { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
-        .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; }
-        .lb-stage { position: relative; max-width: 92vw; max-height: 88vh; }
+        .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; animation: lbFade .25s ease both; }
+        .lb-stage { position: relative; max-width: 92vw; max-height: 88vh; animation: lbZoom .4s cubic-bezier(.2,.75,.2,1) both; }
         :global(.lb-img) { max-width: 92vw; max-height: 88vh; width: auto; height: auto; object-fit: contain; border-radius: 4px; }
         .lb-video { max-width: 92vw; max-height: 82vh; width: auto; height: auto; border-radius: 4px; display: block; background: #000; }
         .lb-count { position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-size: 14px; color: #aeb9c7; }
@@ -122,6 +122,10 @@ export default function ServiceGallery({ title, gallery, videos = [] }) {
           .play-tri { width: 42px; height: 42px; font-size: 15px; }
           .lb-nav { width: 42px; height: 42px; font-size: 22px; } .lb-p { left: 8px; } .lb-n { right: 8px; }
         }
+
+        @keyframes lbFade { from { opacity: 0; } }
+        @keyframes lbZoom { from { opacity: 0; transform: scale(.96); } }
+        @media (prefers-reduced-motion: reduce) { .lb, .lb-stage, :global(.lb-img) { animation: none !important; } }
       `}</style>
     </div>
   );

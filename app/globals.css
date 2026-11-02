@@ -154,7 +154,12 @@ h1, h2, h3, h4 {
 /* Son durumda negatif kenar payı: gölgeler kesilmesin */
 .reveal.in .img-wipe { clip-path: inset(-60px -60px -60px -60px); }
 
+/* Reveal içindeki bölüm etiketlerinin kırmızı çizgisi görününce çizilir */
+.reveal .eyebrow::before { width: 0; transition: width .8s cubic-bezier(.2,.75,.2,1) .25s; }
+.reveal.in .eyebrow::before { width: 28px; }
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal .eyebrow::before { width: 28px; transition: none; }
   .img-wipe { clip-path: none; }
   .btn-primary::after, .btn-dark::after { display: none; }
 }

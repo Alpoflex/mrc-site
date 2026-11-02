@@ -70,7 +70,7 @@ export default function ProjectsGallery() {
 
       <div className="pgrid">
         {items.map((it, i) => (
-          <button key={it.src + i} className="pcell" onClick={() => setLb(i)} aria-label={`${it.catLabel} ${it.type === "video" ? "video" : "görsel"}`}>
+          <button key={it.src + i} className="pcell" style={{ "--i": Math.min(i, 14) }} onClick={() => setLb(i)} aria-label={`${it.catLabel} ${it.type === "video" ? "video" : "görsel"}`}>
             <Image src={it.type === "video" ? it.poster : it.src} alt={`${it.catLabel} projesi — MRC Makine Sanayi Kırıkkale`} fill sizes="(max-width:700px) 50vw, 33vw" className="pimg" />
             {it.type === "video" && (
               <span className="pplay"><span className="pplay-tri">▶</span></span>
@@ -123,6 +123,9 @@ export default function ProjectsGallery() {
         .fbtn:hover { border-color: var(--ink); color: var(--ink); }
         .fbtn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
         .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .pcell { animation: tileIn .55s cubic-bezier(.2,.75,.2,1) both; animation-delay: calc(var(--i) * 35ms); }
+        @keyframes tileIn { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+        @media (prefers-reduced-motion: reduce) { .pcell { animation: none; } }
         .pcell { position: relative; aspect-ratio: 4/3; border: none; padding: 0; cursor: pointer; overflow: hidden; border-radius: 6px; background: var(--bg-soft); }
         :global(.pimg) { object-fit: cover; transition: transform .45s ease; }
         .pcell:hover :global(.pimg) { transform: scale(1.06); }
@@ -133,8 +136,8 @@ export default function ProjectsGallery() {
         .pcat { position: absolute; left: 12px; bottom: 12px; font-family: var(--font-display); font-size: 12px; font-weight: 600; color: #fff; background: rgba(22,32,46,0.8); backdrop-filter: blur(4px); padding: 5px 11px; border-radius: 3px; opacity: 0; transform: translateY(6px); transition: all .25s ease; }
         .pcell:hover .pcat, .pcell:focus-visible .pcat { opacity: 1; transform: none; }
         @media (hover: none) { .pcat { opacity: 1; transform: none; } }
-        .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; }
-        .lb-stage { position: relative; max-width: 92vw; max-height: 88vh; }
+        .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; animation: lbFade .25s ease both; }
+        .lb-stage { position: relative; max-width: 92vw; max-height: 88vh; animation: lbZoom .4s cubic-bezier(.2,.75,.2,1) both; }
         :global(.lb-img) { max-width: 92vw; max-height: 88vh; width: auto; height: auto; object-fit: contain; border-radius: 4px; }
         .lb-video { max-width: 92vw; max-height: 82vh; width: auto; height: auto; border-radius: 4px; display: block; background: #000; }
         .lb-cap { position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-size: 14px; color: #aeb9c7; white-space: nowrap; }
@@ -147,6 +150,10 @@ export default function ProjectsGallery() {
           .pplay-tri { width: 46px; height: 46px; font-size: 16px; }
           .lb-nav { width: 42px; height: 42px; font-size: 22px; } .lb-p { left: 8px; } .lb-n { right: 8px; }
         }
+
+        @keyframes lbFade { from { opacity: 0; } }
+        @keyframes lbZoom { from { opacity: 0; transform: scale(.96); } }
+        @media (prefers-reduced-motion: reduce) { .lb, .lb-stage, :global(.lb-img) { animation: none !important; } }
       `}</style>
     </div>
   );

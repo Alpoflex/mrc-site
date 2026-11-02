@@ -42,13 +42,17 @@ export default function PosterGallery() {
         :global(.poster-img) { display: block; width: 100%; height: auto; }
         .poster-zoom { position: absolute; right: 14px; bottom: 14px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: #fff; background: rgba(22,32,46,0.82); backdrop-filter: blur(4px); padding: 7px 14px; border-radius: 100px; opacity: 0; transform: translateY(6px); transition: all .25s ease; }
         .poster:hover .poster-zoom { opacity: 1; transform: none; }
-        .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
-        :global(.lb-img) { max-width: 92vw; max-height: 90vh; width: auto; height: auto; object-fit: contain; border-radius: 6px; cursor: default; }
+        .lb { position: fixed; inset: 0; z-index: 200; background: rgba(15,20,28,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; animation: lbFade .25s ease both; }
+        :global(.lb-img) { max-width: 92vw; max-height: 90vh; width: auto; height: auto; object-fit: contain; border-radius: 6px; cursor: default; animation: lbZoom .4s cubic-bezier(.2,.75,.2,1) both; }
         .lb-x { position: absolute; top: 20px; right: 24px; background: none; border: none; color: #fff; font-size: 26px; cursor: pointer; opacity: .85; z-index: 2; }
         .lb-x:hover { opacity: 1; }
         @media (max-width: 700px) {
           .posters { grid-template-columns: 1fr; }
         }
+
+        @keyframes lbFade { from { opacity: 0; } }
+        @keyframes lbZoom { from { opacity: 0; transform: scale(.96); } }
+        @media (prefers-reduced-motion: reduce) { .lb, .lb-stage, :global(.lb-img) { animation: none !important; } }
       `}</style>
     </div>
   );
