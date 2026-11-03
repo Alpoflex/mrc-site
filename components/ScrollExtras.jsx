@@ -31,7 +31,7 @@ export default function ScrollExtras() {
       <div ref={barRef} className="sprog" aria-hidden="true" />
       <button
         className={`totop ${showTop ? "show" : ""}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        onClick={() => (window.__lenis ? window.__lenis.scrollTo(0) : window.scrollTo({ top: 0, behavior: "smooth" }))}
         aria-label="Sayfanın başına dön"
       >
         ↑

@@ -12,6 +12,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import WhatsAppFloat from "../components/WhatsAppFloat";
 import ScrollExtras from "../components/ScrollExtras";
+import SmoothScroll from "../components/SmoothScroll";
+import Cursor from "../components/Cursor";
 import { company } from "../data/site";
 
 export const metadata: Metadata = {
@@ -93,6 +95,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Footer />
         <WhatsAppFloat />
         <ScrollExtras />
+        <SmoothScroll />
+        <Cursor />
         {/* Google Analytics (GA4) */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-ZLCC5KBPKF" strategy="afterInteractive" />
         <Script id="gtag-init" strategy="afterInteractive">{`

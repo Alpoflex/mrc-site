@@ -163,3 +163,9 @@ h1, h2, h3, h4 {
   .img-wipe { clip-path: none; }
   .btn-primary::after, .btn-dark::after { display: none; }
 }
+
+/* Lenis yumuşak kaydırma (yalnızca masaüstünde etkin) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }

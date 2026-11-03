@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import HomeHero from "../components/HomeHero";
-import ServicesGrid from "../components/ServicesGrid";
-import HomeShowcase from "../components/HomeShowcase";
+import ServicesScrolly from "../components/ServicesScrolly";
+import ProjectsRail from "../components/ProjectsRail";
+import Manifesto from "../components/Manifesto";
 import Marquee from "../components/Marquee";
 import StructureTypes from "../components/StructureTypes";
 import Reveal from "../components/Reveal";
@@ -17,56 +17,10 @@ export default function Home() {
     <>
       <HomeHero />
 
-      {/* PROJELER VİTRİNİ — müşteri siteye girer girmez işleri görsün */}
-      <section className="section section-dark">
-        <div className="container">
-          <Reveal>
-            <div className="sec-head">
-              <div>
-                <div className="eyebrow" style={{ color: "#ff7a6b" }}>Projelerimiz</div>
-                <h2 className="h2">İşçiliğimizi kendi gözlerinizle görün</h2>
-              </div>
-              <p className="lead sec-head-p" style={{ color: "#9fabbb" }}>
-                Atölyemizden ve sahadan seçtiğimiz kareler; lazer kesimden çelik
-                montaja üretimin her aşaması burada.
-              </p>
-            </div>
-          </Reveal>
-          <HomeShowcase />
-        </div>
-      </section>
+      <Manifesto />
 
-      {/* TANITIM */}
-      <section className="section">
-        <div className="container intro-grid">
-          <Reveal>
-            <div className="intro-img img-wipe">
-              <Image src="/images/celik/celik-06.jpeg" alt="Üretim tesisi" width={560} height={620} className="i-img" />
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="intro-tx">
-              <div className="eyebrow">Hakkımızda</div>
-              <h2 className="h2">Üretimin her aşamasını tek çatı altında topluyoruz</h2>
-              <p className="lead">
-                MRC Makine Sanayi olarak Kırıkkale Hacılar&apos;da çelik konstrüksiyon,
-                lazer kesim, abkant büküm, sac işleme ve inşaat taahhüt alanlarında
-                hizmet veriyoruz. Modern makine parkurumuz ve uzman kadromuzla, küçük
-                bir dekoratif lazer kesimden büyük ölçekli bir fabrika yapısına kadar
-                her işi aynı titizlikle gerçekleştiriyoruz.
-              </p>
-              <p className="lead" style={{ marginTop: 14 }}>
-                Önceliğimiz; teknik çizime tam uyum, kaliteli işçilik ve zamanında
-                teslimat. İşinizi bize emanet ettiğinizde, baştan sona güvenilir bir
-                üretim ortağıyla çalışırsınız.
-              </p>
-              <Link href="/hakkimizda" className="btn btn-dark" style={{ marginTop: 28 }}>
-                Daha fazlası →
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* PROJELER — masaüstünde sabitlenip yatay akan şerit */}
+      <ProjectsRail />
 
       {/* HİZMETLER */}
       <section className="section section-soft">
@@ -83,7 +37,7 @@ export default function Home() {
               </p>
             </div>
           </Reveal>
-          <ServicesGrid />
+          <ServicesScrolly />
         </div>
       </section>
 
@@ -181,9 +135,6 @@ export default function Home() {
       </section>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        .intro-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
-        .intro-img { position: relative; }
-        .i-img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; box-shadow: 0 20px 50px rgba(22,32,46,0.12); }
         .sec-head { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: end; gap: 24px clamp(32px, 6vw, 80px); margin-bottom: clamp(36px, 5vw, 56px); }
         .sec-head .h2 { margin-bottom: 0; }
         .sec-head-p { max-width: 440px; padding-bottom: 6px; }
@@ -225,9 +176,6 @@ export default function Home() {
         .cta-ghost { color: #fff; border-color: rgba(255,255,255,0.5); }
         .cta-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
         @media (max-width: 820px) {
-          .intro-grid { grid-template-columns: 1fr; }
-          .intro-img { order: 2; }
-          .intro-tx { order: 1; }
           .proc { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
           .proc::before { display: none; }
           .why-grid { grid-template-columns: 1fr; }
